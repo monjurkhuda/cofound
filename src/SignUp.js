@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import firebaseApp from "./firebase";
-import "./SignIn.css";
 
 const SignUp = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,12 +25,10 @@ const SignUp = ({ history }) => {
   return (
     <div className="signin__container">
       <div className="prodot__text">
-        <p>CLUB</p>
-        <p className="dot">.</p>
-        <p>SCOUT</p>
+        <p>Co-Founder Match</p>
       </div>
-      <div className="sub__text__centered">
-        <p>Create An Account</p>
+      <div className="sub__text">
+        <p>Sign up as a Co-founder!</p>
       </div>
       <form className="auth__form" onSubmit={handleSignUp}>
         <input
@@ -54,7 +51,7 @@ const SignUp = ({ history }) => {
         {errorMessage}
       </div>
 
-      <Link className="auth__link" to="/">
+      <Link className="auth__link" to="/signin">
         Already have an account? Sign In!
       </Link>
     </div>

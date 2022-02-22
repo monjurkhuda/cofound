@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import firebaseApp from "./firebase.js";
-import "./SignIn.css";
 
 function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -23,9 +22,7 @@ function PasswordReset() {
     <div className="signin__container">
       <div>
         <div className="prodot__text">
-          <p>CLUB</p>
-          <p className="dot">.</p>
-          <p>SCOUT</p>
+          <p>Co-Founder Match</p>
         </div>
         <div className="sub__text">
           <p>Enter Email to Reset Your Password</p>
@@ -52,7 +49,7 @@ function PasswordReset() {
         </Link>
       </div>
       <div>
-        <Link className="auth__link" to="/">
+        <Link className="auth__link" to="/signin">
           Already have an account? Sign In!
         </Link>
       </div>

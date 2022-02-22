@@ -21,8 +21,6 @@ function Notifications() {
     });
   }, []);
 
-  console.log(notifFilteredArray);
-
   return (
     <div className="notifications__container">
       <div className="notifications__title">Notifications:</div>

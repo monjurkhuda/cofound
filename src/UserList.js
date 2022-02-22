@@ -3,78 +3,81 @@ import firebaseApp from "./firebase";
 import { Link } from "react-router-dom";
 import { BiShieldQuarter } from "react-icons/bi";
 import { SiReddit } from "react-icons/si";
+
+import {
+  Avatar,
+  Tag,
+  Input,
+  Box,
+  Text,
+  Flex,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Icon,
+  Heading,
+} from "@chakra-ui/react";
+
 import "./UserList.css";
 
 function UserList(props) {
-  const [clubid, setClubid] = useState("");
-  const [playstyle, setPlaystyle] = useState();
-  const [primaryposition, setPrimaryposition] = useState();
-  const [primarypositionrating, setPrimarypositionrating] = useState();
+  const [username, setUsername] = useState("");
+  const [startupid, setStartupid] = useState("");
+  const [role, setRole] = useState("tech");
+  const [yoe, setYoe] = useState(0);
+  const [timezone, setTimezone] = useState("USA");
   const [redditusername, setRedditusername] = useState("");
-  const [system, setSystem] = useState();
-  const [timezone, setTimezone] = useState();
-  const [username, setUsername] = useState();
-  const [managerClubname, setManagerClubname] = useState();
+  const [bio, setBio] = useState("");
+  const [founderStartupname, setFounderStartupname] = useState();
   const [disabledInviteButton, setDisabledInviteButton] = useState(false);
 
   const userid = props.userid;
   const senderid = props.senderid;
   const db = firebaseApp.database();
   const userRef = db.ref().child("users/" + userid);
-  const managerClubRef = db.ref("clubs/");
-
-  //let managerClub = "";
+  const founderStartupRef = db.ref("startups/");
 
   useEffect(() => {
     userRef.once("value", (snapshot) => {
-      setClubid(snapshot.val().clubid);
-      setPlaystyle(snapshot.val().playstyle);
-      setPrimaryposition(snapshot.val().primaryposition);
-      setPrimarypositionrating(snapshot.val().primarypositionrating);
-      setRedditusername(snapshot.val().redditusername);
-      setSystem(snapshot.val().system);
-      setTimezone(snapshot.val().timezone);
       setUsername(snapshot.val().username);
+      setStartupid(snapshot.val().startupid);
+      setRole(snapshot.val().role);
+      setYoe(snapshot.val().yoe);
+      setTimezone(snapshot.val().timezone);
+      setRedditusername(snapshot.val().redditusername);
+      setBio(snapshot.val().bio);
     });
 
-    managerClubRef
-      .orderByChild("managerid")
+    founderStartupRef
+      .orderByChild("founderid")
       .equalTo(senderid)
       .on("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-          const managerClub = childSnapshot.val().clubname;
-          setManagerClubname(managerClub);
+          const founderStartup = childSnapshot.val().startupname;
+          setFounderStartupname(founderStartup);
         });
       });
   }, [
-    clubid,
-    playstyle,
-    primaryposition,
-    primarypositionrating,
-    redditusername,
-    system,
-    timezone,
     username,
-    managerClubname,
+    startupid,
+    role,
+    yoe,
+    timezone,
+    redditusername,
+    bio,
+    founderStartupname,
   ]);
-
-  console.log(
-    clubid,
-    playstyle,
-    primaryposition,
-    primarypositionrating,
-    redditusername,
-    system,
-    timezone,
-    username,
-    senderid,
-    managerClubname
-  );
 
   const notifRef = db.ref().child("notifications/" + userid);
 
-  function invitePlayer() {
-    if (managerClubname?.length > 0) {
+  function inviteUser() {
+    if (founderStartupname?.length > 0) {
       notifRef
         .orderByChild("senderid")
         .equalTo(senderid)
@@ -82,13 +85,13 @@ function UserList(props) {
           const doesSnapshotHaveData = await snapshot.val();
           if (!doesSnapshotHaveData) {
             notifRef.push({
-              notiftype: "INVITE_TO_CLUB",
+              notiftype: "INVITE_TO_STARTUP",
               senderid: senderid,
             });
           }
         });
     } else {
-      alert("You don't have a club to invite to!");
+      alert("You don't have a Startup to invite to!");
     }
     setDisabledInviteButton(true);
   }
@@ -97,46 +100,93 @@ function UserList(props) {
     return redditusername?.length === 0 ? true : false;
   }
 
-  function clubBadgeShow() {
-    if (clubid?.length > 0) {
-      return <BiShieldQuarter size="1em" color="black" />;
-    } else {
-      return "";
-    }
-  }
-
   return (
-    <tr>
-      <td>{primaryposition}</td>
-      <td className="positionratingtd">{primarypositionrating}</td>
-      <td className="usernametd">
-        <Link style={{ textDecoration: "none" }} to={`/users/${userid}`}>
-          {username}
-        </Link>
-      </td>
-      <td>{clubBadgeShow()}</td>
-      <td>
-        <button
-          className="buttontd"
-          onClick={() => invitePlayer()}
-          disabled={disabledInviteButton}
-        >
-          Invite
-        </button>
-      </td>
-      <td>
-        <a
-          href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
-        >
-          <button
-            className="table__reddit__button"
-            hidden={hideRedditMessage()}
-          >
-            {hideRedditMessage() ? null : <SiReddit size="1.6em" />}
-          </button>
-        </a>
-      </td>
-    </tr>
+    <Tr>
+      <Td>
+        <Flex>
+          <Avatar
+            size="md"
+            className="listlogo"
+            src="https://i.pinimg.com/originals/37/c9/f5/37c9f5492e8219c5f91e2b3c28b74c92.png"
+            alt="Startup Logo"
+          ></Avatar>
+
+          <Flex direction="column" ml={3} w="100%">
+            <Flex>
+              <Link style={{ textDecoration: "none" }} to={`/users/${userid}`}>
+                <Text fontSize="md" fontWeight={500}>
+                  {username}
+                </Text>
+              </Link>
+              <Text fontSize="xs" ml={1}>
+                {timezone}
+              </Text>
+              <Flex
+                backgroundColor="blue.400"
+                borderRadius={8}
+                paddingRight={1}
+                paddingLeft={1}
+                ml={2}
+              >
+                <Text fontSize="xs" color="white">
+                  {role}
+                </Text>
+              </Flex>
+            </Flex>
+
+            <Flex
+              backgroundColor="gray.50"
+              padding={1}
+              margin="2px 0px 2px 0px"
+              width="80%"
+              borderRadius={5}
+              mt={1}
+            >
+              <Text fontSize="xs">{bio}</Text>
+            </Flex>
+          </Flex>
+        </Flex>
+      </Td>
+    </Tr>
+
+    // <tr>
+    //   <td className="usernametd">
+    //     <Link style={{ textDecoration: "none" }} to={`/users/${userid}`}>
+    //       {username}
+    //     </Link>
+    //     <br />
+    //     {bio}
+    //   </td>
+    //   <td className="positionratingtd">{role}</td>
+    //   <td>YOE: {yoe}</td>
+    //   <td>{timezone}</td>
+
+    //   <td>
+    //     <button
+    //       className="buttontd"
+    //       onClick={() => inviteUser()}
+    //       disabled={disabledInviteButton}
+    //     >
+    //       Invite
+    //     </button>
+    //   </td>
+    //   <td>
+    //     <a
+    //       href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
+    //     >
+    //       <button
+    //         className="table__reddit__button"
+    //         hidden={hideRedditMessage()}
+    //       >
+    //         {hideRedditMessage() ? null : (
+    //           <button>
+    //             <SiReddit size="1.6em" /> {redditusername}
+    //           </button>
+    //         )}
+    //       </button>
+    //     </a>
+    //   </td>
+    // </tr>
   );
 }
 

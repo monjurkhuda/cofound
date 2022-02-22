@@ -4,62 +4,47 @@ import Navigation from "./Navigation";
 import firebaseApp from "./firebase";
 import { SiReddit } from "react-icons/si";
 import { ImUser } from "react-icons/im";
-import "./Profile.css";
 
 function UserProfile() {
-  const [system, setSystem] = useState();
-  const [username, setUsername] = useState();
-  const [primaryposition, setPrimaryposition] = useState();
-  const [primarypositionrating, setPrimarypositionrating] = useState();
-  const [timezone, setTimezone] = useState();
-  const [playstyle, setPlaystyle] = useState();
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("tech");
+  const [yoe, setYoe] = useState(0);
+  const [timezone, setTimezone] = useState("USA");
   const [redditusername, setRedditusername] = useState("");
-  const [managerClubname, setManagerClubname] = useState();
+  const [bio, setBio] = useState("");
+  const [founderStartupname, setFounderStartupname] = useState();
   const [disabledInviteButton, setDisabledInviteButton] = useState(false);
 
   const { userid } = useParams("");
   const senderid = firebaseApp.auth().currentUser.uid;
   const db = firebaseApp.database();
   const userRef = db.ref().child("users/" + userid);
-  const managerClubRef = db.ref("clubs/");
+  const founderStartupRef = db.ref("startups/");
   const notifRef = db.ref().child("notifications/" + userid);
-
-  console.log(userid);
 
   useEffect(() => {
     userRef.once("value", (snapshot) => {
       setUsername(snapshot.val().username);
-      setSystem(snapshot.val().system);
-      setPrimaryposition(snapshot.val().primaryposition);
-      setPrimarypositionrating(snapshot.val().primarypositionrating);
+      setRole(snapshot.val().role);
+      setYoe(snapshot.val().yoe);
       setTimezone(snapshot.val().timezone);
-      setPlaystyle(snapshot.val().playstyle);
       setRedditusername(snapshot.val().redditusername);
+      setBio(snapshot.val().bio);
     });
 
-    managerClubRef
-      .orderByChild("managerid")
+    founderStartupRef
+      .orderByChild("founderid")
       .equalTo(senderid)
       .on("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-          const managerClub = childSnapshot.val().clubname;
-          setManagerClubname(managerClub);
+          const founderStartup = childSnapshot.val().startupname;
+          setFounderStartupname(founderStartup);
         });
       });
-  }, [
-    playstyle,
-    primaryposition,
-    primarypositionrating,
-    redditusername,
-    system,
-    timezone,
-    username,
-  ]);
+  }, [bio, yoe, redditusername, timezone, username, role]);
 
-  console.log(managerClubname);
-
-  function invitePlayer() {
-    if (managerClubname?.length > 0) {
+  function inviteUser() {
+    if (founderStartupname?.length > 0) {
       notifRef
         .orderByChild("senderid")
         .equalTo(senderid)
@@ -67,35 +52,26 @@ function UserProfile() {
           const doesSnapshotHaveData = await snapshot.val();
           if (!doesSnapshotHaveData) {
             notifRef.push({
-              notiftype: "INVITE_TO_CLUB",
+              notiftype: "INVITE_TO_STARTUP",
               senderid: senderid,
             });
           }
         });
     } else {
-      alert("You don't have a club to invite to!");
+      alert("You don't have a Startup to invite to!");
     }
     setDisabledInviteButton(true);
   }
-
-  console.log(redditusername.length);
 
   function hideRedditMessage() {
     return redditusername.length === 0 ? true : false;
   }
 
-  function systemStyler(sys) {
-    switch (sys) {
-      case "ps4":
-        return <div className="profile__system__ps4">PS4</div>;
-      case "ps5":
-        return <div className="profile__system__ps4">PS5</div>;
-      case "xboxone":
-        return <div className="profile__system__xboxone">XBOX ONE</div>;
-      case "xbox":
-        return <div className="profile__system__xboxone">XBOX SERIES X</div>;
-      default:
-        break;
+  function yoeDisplayer() {
+    if (yoe === "11") {
+      return "10+";
+    } else {
+      return yoe;
     }
   }
 
@@ -106,10 +82,9 @@ function UserProfile() {
         {username}
       </div>
       <div className="profile__inner__container">
-        {systemStyler(system)}
         <div className="profile__position__rating">
-          <div className="profile__position">{primaryposition}</div>
-          <div className="profile__rating">{primarypositionrating}</div>
+          <div>{timezone}</div>
+          <div className="profile__rating">YOE: {yoeDisplayer()}</div>
         </div>
         <div className="profile__reddit">
           <SiReddit size="1.8em" />
@@ -119,7 +94,7 @@ function UserProfile() {
       <div className="userprofile__buttons">
         <button
           className="userprofile__button"
-          onClick={() => invitePlayer()}
+          onClick={() => inviteUser()}
           disabled={disabledInviteButton}
         >
           Invite +
@@ -128,13 +103,22 @@ function UserProfile() {
           <a
             href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
           >
-            <button disabled={hideRedditMessage()}>Reddit 💬</button>
+            <button
+              className="table__reddit__button"
+              hidden={hideRedditMessage()}
+            >
+              {hideRedditMessage() ? null : (
+                <button>
+                  <SiReddit size="1.6em" /> {redditusername}
+                </button>
+              )}
+            </button>
           </a>
         </div>
       </div>
       <div className="playstyle__container">
-        <div className="playstyle__title">Playstyle:</div>
-        <div className="playstyle__body">{playstyle}</div>
+        <div className="playstyle__title">Bio:</div>
+        <div className="playstyle__body">{bio}</div>
       </div>
 
       <Navigation />

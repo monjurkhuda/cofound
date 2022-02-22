@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import "./Notifications.css";
 
 function NotificationList(props) {
-  const [senderClubname, setSenderClubname] = useState("");
+  const [senderStartupname, setSenderStartupname] = useState("");
   const [senderUsername, setSenderUsername] = useState("");
-  const [senderClubid, setSenderClubid] = useState("");
+  const [senderStartupid, setSenderStartupid] = useState("");
   const [senderid, setSenderid] = useState("");
-  const [myClubid, setMyClubid] = useState("");
+  const [myStartupid, setMyStartupid] = useState("");
   const [notifType, setNotifType] = useState("");
 
   const myid = firebaseApp.auth().currentUser.uid;
@@ -18,55 +18,43 @@ function NotificationList(props) {
     .ref()
     .child("notifications/" + myid + "/" + notifid);
   const myRef = db.ref().child("users/" + myid);
-  const clubRef = db.ref("/clubs");
-
-  console.log(myid, props);
+  const startupRef = db.ref("/startups");
 
   //Getting name of sender and clubname
   useEffect(() => {
     specificNotifRef.once("value", function (snapshot) {
-      console.log(snapshot.val());
       setSenderid(snapshot.val().senderid);
       setNotifType(snapshot.val().notiftype);
     });
 
-    console.log(senderid);
-
     const senderRef = db.ref().child("users/" + senderid);
     senderRef.once("value", (senderSnapshot) => {
       setSenderUsername(senderSnapshot.val().username);
-      setSenderClubid(senderSnapshot.val().clubid);
+      setSenderStartupid(senderSnapshot.val().startupid);
     });
 
-    console.log("senderClubid", senderClubid);
-    console.log("senderClubname", senderClubname);
-
-    if (senderClubid && senderUsername) {
-      const senderClubRef = db.ref().child("clubs/" + senderClubid);
-      senderClubRef.once("value", async function (clubSnapshot) {
-        console.log(clubSnapshot.val());
-        setSenderClubname(clubSnapshot.val().clubname);
+    if (senderStartupid && senderUsername) {
+      const senderStartupRef = db.ref().child("startups/" + senderStartupid);
+      senderStartupRef.once("value", async function (clubSnapshot) {
+        setSenderStartupname(clubSnapshot.val().startupname);
       });
     }
 
     myRef.once("value", (senderSnapshot) => {
-      setMyClubid(senderSnapshot.val().clubid);
+      setMyStartupid(senderSnapshot.val().startupid);
     });
-  }, [senderClubid, senderClubname, myClubid, senderid]);
+  }, [senderStartupid, senderStartupname, myStartupid, senderid]);
 
-  async function acceptPlayer() {
-    console.log(senderid);
+  async function acceptUser() {
     const senderRef = db.ref().child("users/" + senderid);
-    console.log(senderRef);
     senderRef.update({
-      clubid: myClubid,
+      startupid: myStartupid,
     });
 
-    console.log(myClubid);
-
-    const myLineupRef = db.ref().child("lineups/" + myClubid + "/" + senderid);
-    console.log(myLineupRef);
-    myLineupRef.set(senderid);
+    const myRosterRef = db
+      .ref()
+      .child("members/" + myStartupid + "/" + senderid);
+    myRosterRef.set(senderid);
 
     specificNotifRef.set({});
 
@@ -74,44 +62,41 @@ function NotificationList(props) {
     window.location.reload();
   }
 
-  function rejectPlayer() {
+  function rejectUser() {
     specificNotifRef.set({});
 
     //Refreshing page to show cleared notifications
     window.location.reload();
   }
 
-  function acceptClub() {
+  function acceptStartup() {
     //Check if user is manager
-    clubRef
-      .orderByChild("managerid")
+    startupRef
+      .orderByChild("founderid")
       .equalTo(myid)
       .once("value", async function (snapshot) {
         const doesSnapshotHaveData = await snapshot.val();
         if (doesSnapshotHaveData) {
-          alert(
-            "You must delete your club or hand over manager rights to a club member before you can join another club."
-          );
-          return;
+          alert("You must delete your startup before you can join another.");
+        } else {
+          myRef.update({
+            startupid: senderStartupid,
+          });
+
+          const senderRosterRef = db
+            .ref()
+            .child("members/" + senderStartupid + "/" + myid);
+          senderRosterRef.set(myid);
+
+          specificNotifRef.set({});
+
+          //Refreshing page to show cleared notifications
+          window.location.reload();
         }
       });
-
-    myRef.update({
-      clubid: senderClubid,
-    });
-
-    const senderLineupRef = db
-      .ref()
-      .child("lineups/" + senderClubid + "/" + myid);
-    senderLineupRef.set(myid);
-
-    specificNotifRef.set({});
-
-    //Refreshing page to show cleared notifications
-    window.location.reload();
   }
 
-  function rejectClub() {
+  function rejectStartup() {
     specificNotifRef.set({});
 
     //Refreshing page to show cleared notifications
@@ -125,15 +110,15 @@ function NotificationList(props) {
           <Link style={{ textDecoration: "none" }} to={`/users/${senderid}`}>
             {senderUsername}
           </Link>
-          {" wants to join your club."}
+          {" wants to join your Startup!"}
         </td>
         <td>
-          <button className="accept__button" onClick={acceptPlayer}>
+          <button className="accept__button" onClick={acceptUser}>
             +
           </button>
         </td>
         <td>
-          <button className="reject__button" onClick={rejectPlayer}>
+          <button className="reject__button" onClick={rejectUser}>
             x
           </button>
         </td>
@@ -143,19 +128,18 @@ function NotificationList(props) {
     return (
       <tr className="notificationtr">
         <td>
-          {"The club "}
-          <Link style={{ textDecoration: "none" }} to={`/clubs/${senderid}`}>
-            {senderClubname}
+          <Link style={{ textDecoration: "none" }} to={`/startups/${senderid}`}>
+            {senderStartupname}
           </Link>
-          {" wants you."}
+          {" invited you to join their Startup!"}
         </td>
         <td>
-          <button className="accept__button" onClick={acceptClub}>
+          <button className="accept__button" onClick={acceptStartup}>
             +
           </button>
         </td>
         <td>
-          <button className="reject__button" onClick={rejectClub}>
+          <button className="reject__button" onClick={rejectStartup}>
             x
           </button>
         </td>

@@ -1,13 +1,28 @@
 import { Link } from "react-router-dom";
 import firebaseApp from "./firebase";
-import "./Navigation.css";
+import {
+  Box,
+  Text,
+  Flex,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Icon,
+} from "@chakra-ui/react";
+import { VscRocket } from "react-icons/vsc";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsShieldShaded, BsInbox } from "react-icons/bs";
 import { RiUserSearchLine } from "react-icons/ri";
 import { AiOutlineFileSearch } from "react-icons/ai";
 
 const Navigation = () => {
-  const userid = firebaseApp.auth().currentUser.uid;
+  const userid = firebaseApp.auth().currentUser?.uid;
   const db = firebaseApp.database();
   const notifRef = db.ref().child("notifications/" + userid);
   let notifCount = 0;
@@ -20,59 +35,148 @@ const Navigation = () => {
 
   function notificationCircleShow() {
     if (notifCount > 0) {
-      return <div className="notifications__circle">{notifCount}</div>;
+      return (
+        <Flex
+          backgroundColor="red"
+          height="20px"
+          width="20px"
+          justifyItems="center"
+          alignItems="center"
+          p={1}
+          borderRadius={20}
+        >
+          <Text fontSize="xs" fontWeight="700" color="white">
+            {notifCount}
+          </Text>
+        </Flex>
+      );
     } else {
       return (
-        <div hidden className="notifications__circle">
+        <Flex hidden className="notifications__circle">
           {notifCount}
-        </div>
+        </Flex>
       );
     }
   }
 
   return (
-    <div className="nav__container">
-      <div className="nav__search">
-        <Link
-          to="/searchplayers"
-          style={{ textDecoration: "none", color: "white" }}
+    <Flex
+      justifyContent="space-around"
+      w="100%"
+      padding={4}
+      height="fit-content"
+      backgroundColor="white"
+    >
+      <Flex>
+        <Flex
+          backgroundColor="blue.400"
+          height="fit-content"
+          borderRadius={20}
+          padding={2}
         >
-          <RiUserSearchLine />
-          Player Search
-        </Link>
-        <Link
-          to="/searchclubs"
-          style={{ textDecoration: "none", color: "white" }}
+          <VscRocket size={40} color="white" />
+        </Flex>
+        <Text
+          fontSize={40}
+          fontFamily="mono"
+          fontWeight={700}
+          letterSpacing="widest"
+          ml={2}
+          color="blue.700"
         >
-          <AiOutlineFileSearch />
-          Club Search
-        </Link>
-      </div>
+          COFOUND
+        </Text>
+      </Flex>
 
-      <div className="nav__navigation">
-        <div className="nav__icon">
-          <Link to="/">
-            <FaRegUserCircle color="white" size="2.5rem" />
+      <Flex alignItems="center">
+        <Flex color="gray.400">
+          <Link to="/searchstartups">
+            <Flex
+              alignContent="flex-end"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <AiOutlineFileSearch size="2rem" />
+              <Text ml={1}>/search</Text>
+            </Flex>
           </Link>
-          <div className="navtext">Profile</div>
-        </div>
-        <div>
-          <Link to="/myclub">
-            <BsShieldShaded color="white" size="2.5rem" />
+        </Flex>
+
+        <Flex ml={8} color="gray.400">
+          <Link to="/mystartup">
+            <Flex
+              alignContent="flex-end"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <VscRocket size="2rem" />
+              <Text ml={1}>/my startup</Text>
+            </Flex>
           </Link>
-          <div className="navtext">My Club</div>
-        </div>
-        <div className="notifications">
-          <div className="notification__box">
-            <Link to="/notifications">
-              <BsInbox color="white" size="2.5rem" />
-            </Link>
-            {notificationCircleShow()}
-          </div>
-          <div className="navtext">Notifications</div>
-        </div>
-      </div>
-    </div>
+        </Flex>
+
+        <Flex color="gray.400" ml={8}>
+          <Link to="/notifications">
+            <BsInbox size="2rem" />
+          </Link>
+          {notificationCircleShow()}
+        </Flex>
+
+        <Link to="/signin" style={{ textDecoration: "none", color: "white" }}>
+          <Button
+            size="sm"
+            colorScheme="red"
+            ml={8}
+            onClick={() => firebaseApp.auth().signOut()}
+          >
+            Sign Out
+          </Button>
+        </Link>
+      </Flex>
+    </Flex>
+
+    // <div className="nav__container">
+    //   <div className="nav__search">
+    //     <Link
+    //       to="/searchfounders"
+    //       style={{ textDecoration: "none", color: "white" }}
+    //     >
+    //       <RiUserSearchLine />
+    //       Search Founders
+    //     </Link>
+    //     <Link
+    //       to="/searchstartups"
+    //       style={{ textDecoration: "none", color: "white" }}
+    //     >
+    //       <AiOutlineFileSearch />
+    //       Search Startups
+    //     </Link>
+    //   </div>
+
+    //   <div className="nav__navigation">
+    //     <div className="nav__icon">
+    //       <Link to="/dashboard">
+    //         <FaRegUserCircle color="white" size="2.5rem" />
+    //       </Link>
+    //       <div className="navtext">Profile</div>
+    //     </div>
+    //     <div>
+    //       <Link to="/mystartup">
+    //         <BsShieldShaded color="white" size="2.5rem" />
+    //       </Link>
+    //       <div className="navtext">My Startup</div>
+    //     </div>
+    //     <div className="notifications">
+    //       <div className="notification__box">
+    //         <Link to="/notifications">
+    //           <BsInbox color="white" size="2.5rem" />
+    //         </Link>
+    //         {notificationCircleShow()}
+    //       </div>
+    //       <div className="navtext">Notifications</div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

@@ -3,7 +3,24 @@ import { withRouter, Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import firebaseApp from "./firebase.js";
 import { AuthContext } from "./Auth.js";
-import "./SignIn.css";
+import {
+  Input,
+  Box,
+  Text,
+  Flex,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Icon,
+  Heading,
+} from "@chakra-ui/react";
+import { VscRocket } from "react-icons/vsc";
 
 const SignIn = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,7 +48,7 @@ const SignIn = ({ history }) => {
         await firebaseApp
           .auth()
           .signInWithEmailAndPassword("demo@demo.com", "demouserpass");
-        history.push("/dashboard");
+        history.push("/searchstartups");
       } catch (error) {
         setErrorMessage(error.message);
       }
@@ -42,60 +59,86 @@ const SignIn = ({ history }) => {
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/searchstartups" />;
   }
 
   return (
-    <div className="signin__container">
-      <div>
-        <div className="prodot__text">
-          <p>CLUB</p>
-          <p className="dot">.</p>
-          <p>SCOUT</p>
-        </div>
-        <div className="sub__text">
-          <p>Easily Find Clubs and Players For Fifa Pro Clubs</p>
-        </div>
-      </div>
-      <div className="auth__div">
+    <Flex
+      flexDir="column"
+      h="100vh"
+      alignItems="center"
+      backgroundColor="gray.200"
+    >
+      <Flex mt={10}>
+        <Flex
+          backgroundColor="blue.400"
+          height="fit-content"
+          borderRadius={20}
+          padding={2}
+        >
+          <VscRocket size={40} color="white" />
+        </Flex>
+        <Text
+          fontSize={40}
+          fontFamily="mono"
+          fontWeight={700}
+          letterSpacing="widest"
+          ml={2}
+          color="blue.700"
+        >
+          COFOUND
+        </Text>
+      </Flex>
+      <Text>Easily Find Co-Founders For Your Startup</Text>
+      <Flex
+        backgroundColor="white"
+        margin={6}
+        padding={6}
+        borderRadius={20}
+        boxShadow="base"
+      >
         <form className="auth__form" onSubmit={handleSignIn}>
-          <input
-            className="auth__input"
-            name="email"
-            type="email"
-            placeholder="Email"
-          />
-
-          <input
-            className="auth__input"
+          <Input name="email" type="email" placeholder="Email" />
+          <Input
+            mt={4}
             name="password"
             type="password"
             placeholder="Password"
           />
-          <button className="auth__button" type="submit">
+          <Button mt={4} type="submit" colorScheme="yellow" boxShadow="base">
             Sign In
-          </button>
+          </Button>
         </form>
-      </div>
+      </Flex>
 
-      <button className="demo__button" onClick={demoSignIn}>
-        DEMO Sign In
-      </button>
+      <Button colorScheme="purple" onClick={demoSignIn} boxShadow="base">
+        Demo Sign In
+      </Button>
 
-      <div hidden={!errorMessage} className="signin__error">
-        {errorMessage}
-      </div>
-      <div>
-        <Link className="auth__link" to="/signup">
+      <Flex
+        hidden={!errorMessage}
+        margin={4}
+        padding={4}
+        backgroundColor="red.400"
+        borderRadius={10}
+      >
+        <Text fontSize="sm" w="40vh" color="white">
+          {errorMessage}
+        </Text>
+      </Flex>
+
+      <Link className="auth__link" to="/signup">
+        <Text mt={2} color="blue.600" fontWeight="400">
           Don't have an account? Sign Up!
-        </Link>
-      </div>
-      <div>
-        <Link className="auth__link" to="/passwordreset">
+        </Text>
+      </Link>
+
+      <Link className="auth__link" to="/passwordreset">
+        <Text mt={2} color="red.600" fontWeight="400">
           Forgot Password?
-        </Link>
-      </div>
-    </div>
+        </Text>
+      </Link>
+    </Flex>
   );
 };
 
