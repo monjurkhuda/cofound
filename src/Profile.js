@@ -73,12 +73,16 @@ function Profile() {
       minWidth="280px"
       maxWidth="300px"
     >
+      <Text color="gray.500" fontWeight="500">
+        My Profile
+      </Text>
       <Flex
         backgroundColor="yellow.400"
         p="2px"
         w="fit-content"
         borderRadius={50}
         zIndex={1}
+        mt={2}
       >
         <Flex backgroundColor="white" p="2px" w="fit-content" borderRadius={50}>
           <Avatar size="xl" />

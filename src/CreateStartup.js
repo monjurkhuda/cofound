@@ -1,12 +1,32 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import firebaseApp from "./firebase.js";
-import "./CreateStartup.css";
 import Navigation from "./Navigation.js";
+import {
+  Input,
+  Box,
+  Text,
+  Flex,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tag,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Icon,
+  Heading,
+  Avatar,
+  Select,
+} from "@chakra-ui/react";
+import { VscRocket } from "react-icons/vsc";
 
 function CreateStartup() {
   const [startupname, setStartupname] = useState("");
-  const [timezone, setTimezone] = useState("");
+  const [timezone, setTimezone] = useState("USA");
   const [shortdescription, setShortdescription] = useState("");
   const [longdescription, setLongdescription] = useState("");
   const [logourl, setLogourl] = useState("");
@@ -50,59 +70,78 @@ function CreateStartup() {
   }
 
   return (
-    <div>
-      <div className="createclub__container">
-        <div className="createclub__system__timezone">
-          <input
-            className="createclub__select"
+    <>
+      <Navigation />
+      <Flex
+        flexDir="column"
+        alignItems="center"
+        h="100vh"
+        backgroundColor="gray.200"
+      >
+        <Flex
+          direction="column"
+          width="60vw"
+          height="fit-content"
+          backgroundColor="white"
+          boxShadow="base"
+          borderRadius={10}
+          padding={8}
+          mt={10}
+        >
+          <Heading size="lg" color="blue.700">
+            Create Startup Profile
+          </Heading>
+
+          <Input
+            mt={2}
             placeholder="Startup Name"
             maxLength="20"
             onChange={(e) => setStartupname(e.target.value)}
-          ></input>
+          ></Input>
 
-          <select
-            className="createprofile__select"
-            onChange={(e) => setTimezone(e.target.value)}
-          >
+          <Select mt={2} onChange={(e) => setTimezone(e.target.value)}>
             <option defaultValue value="USA">
               USA
             </option>
             <option value="EU">EU</option>
             <option value="IND">IND</option>
             <option value="AFR">AFR</option>
-          </select>
+          </Select>
 
-          <input
-            className="createclub__select"
+          <Input
+            mt={2}
             placeholder="Short Description"
             maxLength="80"
             onChange={(e) => setShortdescription(e.target.value)}
-          ></input>
-        </div>
+          ></Input>
 
-        <input
-          className="createclub__select"
-          placeholder="Long Description"
-          maxLength="300"
-          onChange={(e) => setLongdescription(e.target.value)}
-        ></input>
+          <Input
+            mt={2}
+            placeholder="Long Description"
+            maxLength="300"
+            onChange={(e) => setLongdescription(e.target.value)}
+          ></Input>
 
-        <input
-          className="createclub__select"
-          placeholder="Logo Url"
-          onChange={(e) => setLogourl(e.target.value)}
-        ></input>
+          <Flex mt={2} alignItems="center">
+            <Avatar src={logourl}></Avatar>
+            <Input
+              ml={2}
+              placeholder="Logo Url"
+              onChange={(e) => setLogourl(e.target.value)}
+            ></Input>
+          </Flex>
+        </Flex>
 
-        <button
+        <Button
           disabled={startupname.length < 1 || shortdescription.length < 1}
-          className="createclub__button"
+          mt={6}
+          colorScheme="yellow"
           onClick={createClubHandler}
         >
           Create Startup
-        </button>
-      </div>
-      <Navigation />
-    </div>
+        </Button>
+      </Flex>
+    </>
   );
 }
 

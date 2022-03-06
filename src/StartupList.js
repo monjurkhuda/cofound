@@ -20,6 +20,7 @@ import {
   TableCaption,
   Icon,
   Heading,
+  useToast,
 } from "@chakra-ui/react";
 
 function StartupList(props) {
@@ -43,6 +44,8 @@ function StartupList(props) {
   const db = firebaseApp.database();
   const allStartupsRef = db.ref("/startups");
   const startupRef = db.ref().child("startups/" + startupid);
+
+  const toast = useToast();
 
   var lookingForArray = [];
 
@@ -102,7 +105,13 @@ function StartupList(props) {
               }
             });
           setDisabledJoinButton(true);
-          alert("Request to join startup was sent!");
+          toast({
+            title: "Join Request",
+            description: "Request to join startup was sent!",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       });
   }
@@ -153,6 +162,8 @@ function StartupList(props) {
               </Text>
             </Flex>
 
+            <Text fontSize="xs">{shortdescription}</Text>
+
             <Flex mt={1}>
               <Text fontSize="xs">Hiring: </Text>
               {lookingForArray.map((openPos) => (
@@ -168,43 +179,6 @@ function StartupList(props) {
                   </Text>
                 </Flex>
               ))}
-            </Flex>
-
-            <Flex
-              mt={1}
-              width="100%"
-              justifyItems="flex-end"
-              alignItems="flex-end"
-              justifyContent="flex-end"
-            >
-              <a
-                href={`https://www.reddit.com/message/compose/?to=${redditUsername}`}
-              >
-                <Tag
-                  hidden={hideRedditMessage()}
-                  backgroundColor="white"
-                  boxShadow="base"
-                >
-                  {hideRedditMessage() ? null : (
-                    <>
-                      <SiReddit size="1.3em" color="red" />
-                      <Text ml={1} color="red">
-                        {redditUsername}
-                      </Text>
-                    </>
-                  )}
-                </Tag>
-              </a>
-              <Button
-                size="xs"
-                ml={2}
-                colorScheme="blue"
-                boxShadow="base"
-                onClick={() => requestToJoin()}
-                disabled={disabledJoinButton}
-              >
-                <Text fontWeight="600">+ Join</Text>
-              </Button>
             </Flex>
           </Flex>
         </Flex>

@@ -146,9 +146,6 @@ function StartupList(props) {
       </Td>
 
       <Td>
-        <Text fontSize="sm" mb={1} fontFamily="cursive">
-          {founderUsername}
-        </Text>
         <a
           href={`https://www.reddit.com/message/compose/?to=${redditUsername}`}
         >
@@ -157,7 +154,15 @@ function StartupList(props) {
             backgroundColor="white"
             boxShadow="base"
           >
-            {hideRedditMessage() ? null : <SiReddit size="1.3em" color="red" />}
+            {hideRedditMessage() ? null : (
+              <>
+                {" "}
+                <SiReddit size="1.3em" color="red" />
+                <Text ml={1} color="red">
+                  {redditUsername}
+                </Text>{" "}
+              </>
+            )}
           </Tag>
         </a>
       </Td>

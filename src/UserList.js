@@ -24,8 +24,6 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-import "./UserList.css";
-
 function UserList(props) {
   const [username, setUsername] = useState("");
   const [startupid, setStartupid] = useState("");

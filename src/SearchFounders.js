@@ -22,7 +22,6 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-import "./List.css";
 import { VscRocket } from "react-icons/vsc";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiSearchCircle } from "react-icons/hi";

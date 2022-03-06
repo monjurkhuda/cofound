@@ -3,7 +3,6 @@ import StartupList from "./StartupList";
 import Navigation from "./Navigation";
 import Profile from "./Profile";
 import firebaseApp from "./firebase";
-import "./List.css";
 import {
   Input,
   Box,

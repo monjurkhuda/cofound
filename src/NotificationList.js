@@ -1,7 +1,42 @@
 import React, { useState, useEffect } from "react";
 import firebaseApp from "./firebase";
 import { Link } from "react-router-dom";
-import "./Notifications.css";
+
+import Navigation from "./Navigation";
+
+import { useParams } from "react-router-dom";
+import Roster from "./Roster";
+import { BiShieldQuarter } from "react-icons/bi";
+import { FaUserTie } from "react-icons/fa";
+import { SiReddit } from "react-icons/si";
+import StartupList from "./StartupList";
+import Profile from "./Profile";
+import {
+  Input,
+  Box,
+  Text,
+  Flex,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Icon,
+  Heading,
+  Select,
+  Avatar,
+  useToast,
+  ButtonGroup,
+} from "@chakra-ui/react";
+import { VscRocket } from "react-icons/vsc";
+import { AiOutlineSearch } from "react-icons/ai";
+import { HiSearchCircle } from "react-icons/hi";
+import { BiEnvelope } from "react-icons/bi";
+import { FiUserPlus } from "react-icons/fi";
 
 function NotificationList(props) {
   const [senderStartupname, setSenderStartupname] = useState("");
@@ -19,6 +54,8 @@ function NotificationList(props) {
     .child("notifications/" + myid + "/" + notifid);
   const myRef = db.ref().child("users/" + myid);
   const startupRef = db.ref("/startups");
+
+  const toast = useToast();
 
   //Getting name of sender and clubname
   useEffect(() => {
@@ -77,7 +114,14 @@ function NotificationList(props) {
       .once("value", async function (snapshot) {
         const doesSnapshotHaveData = await snapshot.val();
         if (doesSnapshotHaveData) {
-          alert("You must delete your startup before you can join another.");
+          toast({
+            title: "Already Have One!",
+            description:
+              "You must delete your startup before you can join another.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         } else {
           myRef.update({
             startupid: senderStartupid,
@@ -105,45 +149,76 @@ function NotificationList(props) {
 
   if (notifType === "REQUEST_TO_JOIN") {
     return (
-      <tr className="notificationtr">
-        <td>
-          <Link style={{ textDecoration: "none" }} to={`/users/${senderid}`}>
-            {senderUsername}
-          </Link>
-          {" wants to join your Startup!"}
-        </td>
-        <td>
-          <button className="accept__button" onClick={acceptUser}>
-            +
-          </button>
-        </td>
-        <td>
-          <button className="reject__button" onClick={rejectUser}>
-            x
-          </button>
-        </td>
-      </tr>
+      <Tr backgroundColor="gray.100" borderBottom="2px" borderColor="white">
+        <Td>
+          <Flex>
+            <Flex mr={2}>
+              <FiUserPlus size={26} />
+            </Flex>
+            <Link style={{ textDecoration: "none" }} to={`/users/${senderid}`}>
+              <Text fontWeight="600">{`${senderUsername} wants to join your Startup!`}</Text>
+            </Link>
+          </Flex>
+        </Td>
+        <Td>
+          <Button
+            backgroundColor="white"
+            boxShadow="base"
+            size="sm"
+            onClick={acceptUser}
+          >
+            <Text>✔️</Text>
+          </Button>
+        </Td>
+        <Td>
+          <Button
+            backgroundColor="black"
+            boxShadow="base"
+            size="sm"
+            onClick={rejectUser}
+          >
+            <Text>❌</Text>
+          </Button>
+        </Td>
+      </Tr>
     );
   } else {
     return (
-      <tr className="notificationtr">
-        <td>
-          <Link style={{ textDecoration: "none" }} to={`/startups/${senderid}`}>
-            {senderStartupname}
-          </Link>
-          {" invited you to join their Startup!"}
-        </td>
-        <td>
-          <button className="accept__button" onClick={acceptStartup}>
-            +
-          </button>
-        </td>
-        <td>
-          <button className="reject__button" onClick={rejectStartup}>
-            x
-          </button>
-        </td>
-      </tr>
+      <Tr backgroundColor="gray.100" borderBottom="4px" borderColor="white">
+        <Td>
+          <Flex>
+            <Flex mr={2}>
+              <BiEnvelope size={26} />
+            </Flex>
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`/startups/${senderid}`}
+            >
+              <Text fontWeight="500">{`${senderStartupname} invited you to join their Startup!`}</Text>
+            </Link>
+          </Flex>
+        </Td>
+        <Td>
+          <Button
+            backgroundColor="white"
+            boxShadow="base"
+            size="sm"
+            onClick={acceptStartup}
+          >
+            ✔️
+          </Button>
+        </Td>
+        <Td>
+          <Button
+            backgroundColor="black"
+            boxShadow="base"
+            size="sm"
+            onClick={rejectStartup}
+          >
+            ❌
+          </Button>
+        </Td>
+      </Tr>
     );
   }
 }

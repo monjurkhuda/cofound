@@ -67,37 +67,39 @@ const Navigation = () => {
       height="fit-content"
       backgroundColor="white"
     >
-      <Flex>
-        <Flex
-          backgroundColor="blue.400"
-          height="fit-content"
-          borderRadius={20}
-          padding={2}
-        >
-          <VscRocket size={40} color="white" />
+      <Link to="/searchstartups">
+        <Flex>
+          <Flex
+            backgroundColor="blue.400"
+            height="fit-content"
+            borderRadius={20}
+            padding={2}
+          >
+            <VscRocket size={40} color="white" />
+          </Flex>
+          <Text
+            fontSize={40}
+            fontFamily="mono"
+            fontWeight={700}
+            letterSpacing="widest"
+            ml={2}
+            color="blue.700"
+          >
+            COFOUND
+          </Text>
         </Flex>
-        <Text
-          fontSize={40}
-          fontFamily="mono"
-          fontWeight={700}
-          letterSpacing="widest"
-          ml={2}
-          color="blue.700"
-        >
-          COFOUND
-        </Text>
-      </Flex>
+      </Link>
 
       <Flex alignItems="center">
         <Flex color="gray.400">
-          <Link to="/searchstartups">
+          <Link to="/searchfounders">
             <Flex
               alignContent="flex-end"
               justifyContent="flex-end"
               alignItems="center"
             >
-              <AiOutlineFileSearch size="2rem" />
-              <Text ml={1}>/search</Text>
+              <RiUserSearchLine size="2rem" />
+              <Text ml={1}>/search founders</Text>
             </Flex>
           </Link>
         </Flex>

@@ -33,7 +33,7 @@ const SignIn = ({ history }) => {
         await firebaseApp
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
-        history.push("/dashboard");
+        history.push("/searchstartups");
       } catch (error) {
         setErrorMessage(error.message);
       }

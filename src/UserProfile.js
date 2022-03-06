@@ -4,6 +4,37 @@ import Navigation from "./Navigation";
 import firebaseApp from "./firebase";
 import { SiReddit } from "react-icons/si";
 import { ImUser } from "react-icons/im";
+import Roster from "./Roster";
+import { BiShieldQuarter } from "react-icons/bi";
+import { FaUserTie } from "react-icons/fa";
+
+import StartupList from "./StartupList";
+import Profile from "./Profile";
+import {
+  Input,
+  Box,
+  Text,
+  Flex,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Icon,
+  Heading,
+  Select,
+  Avatar,
+  useToast,
+  ButtonGroup,
+} from "@chakra-ui/react";
+import { VscRocket } from "react-icons/vsc";
+import { AiOutlineSearch } from "react-icons/ai";
+import { HiSearchCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 function UserProfile() {
   const [username, setUsername] = useState("");
@@ -21,6 +52,8 @@ function UserProfile() {
   const userRef = db.ref().child("users/" + userid);
   const founderStartupRef = db.ref("startups/");
   const notifRef = db.ref().child("notifications/" + userid);
+
+  const toast = useToast();
 
   useEffect(() => {
     userRef.once("value", (snapshot) => {
@@ -57,8 +90,21 @@ function UserProfile() {
             });
           }
         });
+      toast({
+        title: "Invite Sent",
+        description: "Invite sent to user!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } else {
-      alert("You don't have a Startup to invite to!");
+      toast({
+        title: "Invite where?",
+        description: "You don't have a Startup to invite to!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     }
     setDisabledInviteButton(true);
   }
@@ -76,53 +122,145 @@ function UserProfile() {
   }
 
   return (
-    <div className="profile__container">
-      <div className="userprofile__username">
-        <ImUser size="1.2em" />
-        {username}
-      </div>
-      <div className="profile__inner__container">
-        <div className="profile__position__rating">
-          <div>{timezone}</div>
-          <div className="profile__rating">YOE: {yoeDisplayer()}</div>
-        </div>
-        <div className="profile__reddit">
-          <SiReddit size="1.8em" />
-          <span className="profile__reddit__text">{redditusername}</span>
-        </div>
-      </div>
-      <div className="userprofile__buttons">
-        <button
-          className="userprofile__button"
-          onClick={() => inviteUser()}
-          disabled={disabledInviteButton}
-        >
-          Invite +
-        </button>
-        <div className="userprofile__button">
-          <a
-            href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
-          >
-            <button
-              className="table__reddit__button"
-              hidden={hideRedditMessage()}
-            >
-              {hideRedditMessage() ? null : (
-                <button>
-                  <SiReddit size="1.6em" /> {redditusername}
-                </button>
-              )}
-            </button>
-          </a>
-        </div>
-      </div>
-      <div className="playstyle__container">
-        <div className="playstyle__title">Bio:</div>
-        <div className="playstyle__body">{bio}</div>
-      </div>
-
+    <Flex
+      flexDir="column"
+      justifyItems="center"
+      h="100vh"
+      backgroundColor="gray.200"
+    >
       <Navigation />
-    </div>
+      <Flex flexDir="row">
+        <Flex>
+          <Profile />
+        </Flex>
+        <Flex direction="column" p={6} w="100%">
+          <Flex
+            direction="column"
+            width="60vw"
+            height="fit-content"
+            backgroundColor="white"
+            boxShadow="base"
+            borderRadius={10}
+            padding={4}
+          >
+            <Flex alignItems="center" justifyContent="space-between">
+              <Avatar size="xl" />
+              <Button
+                size="sm"
+                boxShadow="base"
+                colorScheme="yellow"
+                onClick={() => inviteUser()}
+                disabled={disabledInviteButton}
+              >
+                + Invite
+              </Button>
+            </Flex>
+            <Flex>
+              <Heading size="lg">{username}</Heading>
+              <Text>{timezone}</Text>
+            </Flex>
+            <Text fontSize="xs">
+              {yoeDisplayer()} years of experience in {role}
+            </Text>
+            <Flex mt={2} alignItems="center">
+              <Text fontSize="sm" fontWeight="500" color="gray.600">
+                Contact:
+              </Text>
+              <a
+                href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
+              >
+                {hideRedditMessage() ? null : (
+                  <Button
+                    ml={2}
+                    size="xs"
+                    backgroundColor="white"
+                    boxShadow="base"
+                    color="red"
+                  >
+                    <SiReddit size={14} />
+                    <Text ml={1}>{redditusername}</Text>
+                  </Button>
+                )}
+              </a>
+            </Flex>
+            <Flex
+              h="fit-content"
+              backgroundColor="gray.100"
+              borderRadius={10}
+              p={2}
+              mt={4}
+            >
+              <Text color="gray.600">{bio}</Text>
+            </Flex>
+            {/* <Flex direction="column" mt={4}>
+              <Text>Members:</Text>
+              <Table>
+                <Tbody>
+                  {rosterArray.map((userid) => {
+                    return (
+                      <Roster
+                        userid={userid}
+                        isFounder={false}
+                        founderid={founderid}
+                        startupid={startupid}
+                      />
+                    );
+                  })}
+                </Tbody>
+              </Table>
+            </Flex> */}
+          </Flex>
+        </Flex>
+      </Flex>
+    </Flex>
+
+    // <div className="profile__container">
+    //   <div className="userprofile__username">
+    //     <ImUser size="1.2em" />
+    //     {username}
+    //   </div>
+    //   <div className="profile__inner__container">
+    //     <div className="profile__position__rating">
+    //       <div>{timezone}</div>
+    //       <div className="profile__rating">YOE: {yoeDisplayer()}</div>
+    //     </div>
+    //     <div className="profile__reddit">
+    //       <SiReddit size="1.8em" />
+    //       <span className="profile__reddit__text">{redditusername}</span>
+    //     </div>
+    //   </div>
+    //   <div className="userprofile__buttons">
+    //     <button
+    //       className="userprofile__button"
+    //       onClick={() => inviteUser()}
+    //       disabled={disabledInviteButton}
+    //     >
+    //       Invite +
+    //     </button>
+    //     <div className="userprofile__button">
+    //       <a
+    //         href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
+    //       >
+    //         <button
+    //           className="table__reddit__button"
+    //           hidden={hideRedditMessage()}
+    //         >
+    //           {hideRedditMessage() ? null : (
+    //             <button>
+    //               <SiReddit size="1.6em" /> {redditusername}
+    //             </button>
+    //           )}
+    //         </button>
+    //       </a>
+    //     </div>
+    //   </div>
+    //   <div className="playstyle__container">
+    //     <div className="playstyle__title">Bio:</div>
+    //     <div className="playstyle__body">{bio}</div>
+    //   </div>
+
+    //   <Navigation />
+    // </div>
   );
 }
 

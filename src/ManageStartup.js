@@ -2,7 +2,32 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import firebaseApp from "./firebase";
 import Navigation from "./Navigation";
-import "./ManageStartup.css";
+
+import {
+  Input,
+  Box,
+  Text,
+  Flex,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tag,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Icon,
+  Heading,
+  Avatar,
+  Select,
+  Checkbox,
+  FormLabel,
+  TagLabel,
+  Stack,
+} from "@chakra-ui/react";
+import { VscRocket } from "react-icons/vsc";
 
 function ManageStartup() {
   const [startupname, setStartupname] = useState("");
@@ -134,11 +159,157 @@ function ManageStartup() {
   }
 
   if (isLoading) {
-    return <div className="App">Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
-    <div>
+    <>
+      <Navigation />
+      <Flex
+        flexDir="column"
+        alignItems="center"
+        h="100vh"
+        backgroundColor="gray.200"
+      >
+        <Flex
+          direction="column"
+          width="60vw"
+          height="fit-content"
+          backgroundColor="white"
+          boxShadow="base"
+          borderRadius={10}
+          padding={8}
+          mt={10}
+        >
+          <Heading size="lg" color="blue.700">
+            Manage Startup
+          </Heading>
+
+          <Avatar size="lg" src={logourl}></Avatar>
+
+          <Input
+            mt={2}
+            placeholder="Logo Url"
+            value={logourl}
+            onChange={(e) => setLogourl(e.target.value)}
+          ></Input>
+
+          <Input
+            mt={2}
+            value={startupname}
+            placeholder="Startup Name"
+            maxLength="20"
+            onChange={(e) => setStartupname(e.target.value)}
+          ></Input>
+
+          <Select
+            mt={2}
+            value={timezone}
+            onChange={(e) => setTimezone(e.target.value)}
+          >
+            <option defaultValue value="USA">
+              USA
+            </option>
+            <option value="EU">EU</option>
+            <option value="IND">IND</option>
+            <option value="AFR">AFR</option>
+          </Select>
+
+          <Input
+            mt={2}
+            value={shortdescription}
+            placeholder="Tagline"
+            maxLength="80"
+            onChange={(e) => setShortdescription(e.target.value)}
+          ></Input>
+
+          <Input
+            mt={2}
+            value={longdescription}
+            placeholder="Description"
+            maxLength="300"
+            onChange={(e) => setLongdescription(e.target.value)}
+          ></Input>
+
+          <Text fontWeight="600" color="gray.600" mt={2}>
+            Open Positions:
+          </Text>
+
+          <Stack spacing={[1, 3]} direction={["column", "row"]} wrap="wrap">
+            <Checkbox
+              ml={1}
+              name="any"
+              defaultChecked={wantany === "yes" ? true : false}
+              onChange={(e) => posAvailabilitySetter(e)}
+            >
+              Any
+            </Checkbox>
+
+            <Checkbox
+              name="tech"
+              defaultChecked={wanttech === "yes" ? true : false}
+              onChange={(e) => posAvailabilitySetter(e)}
+            >
+              Tech
+            </Checkbox>
+
+            <Checkbox
+              name="biz"
+              defaultChecked={wantbiz === "yes" ? true : false}
+              onChange={(e) => posAvailabilitySetter(e)}
+            >
+              Biz
+            </Checkbox>
+
+            <Checkbox
+              name="sales"
+              defaultChecked={wantsales === "yes" ? true : false}
+              onChange={(e) => posAvailabilitySetter(e)}
+            >
+              Sales
+            </Checkbox>
+
+            <Checkbox
+              name="hr"
+              defaultChecked={wanthr === "yes" ? true : false}
+              onChange={(e) => posAvailabilitySetter(e)}
+            >
+              HR
+            </Checkbox>
+          </Stack>
+        </Flex>
+
+        <Flex mt={6}>
+          <Button
+            colorScheme="blue"
+            disabled={
+              startupname.length < 1 ||
+              shortdescription.length < 1 ||
+              longdescription < 1
+            }
+            onClick={saveHandler}
+          >
+            Save Changes
+          </Button>
+
+          <Button ml={6} colorScheme="red" onClick={cancelHandler}>
+            Cancel
+          </Button>
+
+          <Button
+            ml={6}
+            boxShadow="base"
+            backgroundColor="white"
+            border="4px"
+            borderColor="gray.100"
+            onClick={deleteStartup}
+          >
+            💀 Delete Startup
+          </Button>
+        </Flex>
+      </Flex>
+
+      {/* <div>
       <div className="manageclub__container">
         <h3>Manage Startup</h3>
 
@@ -267,7 +438,8 @@ function ManageStartup() {
       </div>
 
       <Navigation />
-    </div>
+    </div> */}
+    </>
   );
 }
 
