@@ -3,27 +3,7 @@ import { Link } from "react-router-dom";
 import firebaseApp from "../firebase";
 import { SiReddit } from "react-icons/si";
 import { FiEdit2 } from "react-icons/fi";
-import { ImUser } from "react-icons/im";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tag,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-  Avatar,
-} from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
+import { Text, Flex, Button, Tag, Avatar } from "@chakra-ui/react";
 
 function Profile() {
   const [username, setUsername] = useState("");
@@ -32,7 +12,6 @@ function Profile() {
   const [timezone, setTimezone] = useState("USA");
   const [redditusername, setRedditusername] = useState("");
   const [bio, setBio] = useState("");
-  const [startupid, setStartupid] = useState("");
 
   const userid = firebaseApp.auth().currentUser.uid;
   const db = firebaseApp.database();

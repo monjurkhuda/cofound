@@ -3,3 +3,4 @@
 [x] startup link in notifications goes to wrong link
 [x] notification badge doesn't show on refresh
 [ ] make ui responsive
+[ ] implement images
