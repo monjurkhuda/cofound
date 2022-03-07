@@ -110,13 +110,16 @@ function MyStartup() {
             <Flex direction="column" p={6} w="100%">
               <Flex
                 direction="column"
-                width="60vw"
+                width={["86vw", "86vw", "60vw"]}
                 height="fit-content"
                 backgroundColor="white"
                 boxShadow="base"
                 borderRadius={10}
                 padding={4}
               >
+                <Text margin="auto" color="gray.500" fontWeight="500" mb={4}>
+                  My Startup
+                </Text>
                 <Flex alignItems="center" justifyContent="space-between">
                   <Avatar size="xl" src={logourl} />
                   <Button
@@ -194,7 +197,7 @@ function MyStartup() {
               <Flex
                 direction="row"
                 justifyContent="space-around"
-                width="60vw"
+                width={["86vw", "86vw", "60vw"]}
                 height="fit-content"
                 backgroundColor="white"
                 boxShadow="base"

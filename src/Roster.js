@@ -1,26 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebaseApp from "./firebase";
 import { Link, useHistory } from "react-router-dom";
-import { MdExitToApp } from "react-icons/md";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tag,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-  Avatar,
-} from "@chakra-ui/react";
+import { Text, Flex, Button, Tr, Td, Avatar, Stack } from "@chakra-ui/react";
 import { GiConverseShoe } from "react-icons/gi";
 
 function Roster(props) {
@@ -28,13 +9,10 @@ function Roster(props) {
   const [role, setRole] = useState("");
   const [yoe, setYoe] = useState();
   const [timezone, setTimezone] = useState("");
-  const [redditusername, setRedditusername] = useState("");
-  const [bio, setBio] = useState("");
 
   const history = useHistory();
 
   const userid = props.userid;
-  const isFounder = props.isFounder;
   const founderid = props.founderid;
   const startupid = props.startupid;
 
@@ -42,7 +20,6 @@ function Roster(props) {
   const myid = firebaseApp.auth().currentUser.uid;
   const userRef = db.ref().child("users/" + userid);
   const memberRef = db.ref().child("members/" + startupid + "/" + userid);
-  const startupRef = db.ref().child("startups/" + startupid);
 
   function hideRemoveButton() {
     if (userid === founderid || myid !== founderid) {
@@ -58,9 +35,8 @@ function Roster(props) {
       setRole(snapshot.val().role);
       setYoe(snapshot.val().yoe);
       setTimezone(snapshot.val().timezone);
-      setRedditusername(snapshot.val().redditusername);
     });
-  }, []);
+  }, [userRef]);
 
   function removeMember() {
     if (window.confirm("Are you sure you want to remove this member?")) {
@@ -109,7 +85,7 @@ function Roster(props) {
               </Text>
             </Flex>
 
-            <Flex direction="row" mt={1}>
+            <Stack spacing={[1, 3]} direction={["column", "row"]} wrap="wrap">
               <Text fontSize="xs">{yoe} years of experience in </Text>
               <Text
                 backgroundColor="blue.400"
@@ -117,12 +93,13 @@ function Roster(props) {
                 paddingRight={1}
                 paddingLeft={1}
                 ml={1}
+                w="fit-content"
                 fontSize="xs"
                 color="white"
               >
                 {role}
               </Text>
-            </Flex>
+            </Stack>
           </Flex>
         </Flex>
       </Td>
@@ -134,7 +111,8 @@ function Roster(props) {
           colorScheme="red"
           boxShadow="base"
         >
-          <GiConverseShoe size={20} /> Kick
+          <GiConverseShoe size={20} />{" "}
+          <Text display={["none", "flex"]}>Kick</Text>
         </Button>
       </Td>
     </Tr>

@@ -174,7 +174,7 @@ function ManageStartup() {
       >
         <Flex
           direction="column"
-          width="60vw"
+          width={["86vw", "86vw", "60vw"]}
           height="fit-content"
           backgroundColor="white"
           boxShadow="base"
@@ -283,7 +283,12 @@ function ManageStartup() {
           </Stack>
         </Flex>
 
-        <Flex mt={6}>
+        <Stack
+          mt={6}
+          spacing={[1, 3]}
+          direction={["column", "row"]}
+          wrap="wrap"
+        >
           <Button
             colorScheme="blue"
             disabled={
@@ -310,7 +315,7 @@ function ManageStartup() {
           >
             💀 Delete Startup
           </Button>
-        </Flex>
+        </Stack>
       </Flex>
     </>
   );

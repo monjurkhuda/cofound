@@ -87,7 +87,7 @@ function CreateProfile() {
 
       <Flex
         direction="column"
-        width="60vw"
+        width={["86vw", "86vw", "60vw"]}
         height="fit-content"
         backgroundColor="white"
         boxShadow="base"

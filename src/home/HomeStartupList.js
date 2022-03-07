@@ -1,22 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Tag,
-  Avatar,
-  AvatarBadge,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Text, Flex, Tr, Td, Tag, Avatar } from "@chakra-ui/react";
 import firebaseApp from "../firebase";
 import { Link } from "react-router-dom";
 import { SiReddit } from "react-icons/si";
@@ -37,7 +20,6 @@ function StartupList(props) {
 
   const startupid = props.startupid;
   const db = firebaseApp.database();
-  const allStartupsRef = db.ref("/startups");
   const startupRef = db.ref().child("startups/" + startupid);
 
   var lookingForArray = [];
@@ -122,9 +104,10 @@ function StartupList(props) {
             </Flex>
             <Flex>
               <Text fontSize="xs">Hiring: </Text>
-              {lookingForArray.map((openPos) => (
+              {lookingForArray.map((openPos, index) => (
                 <Flex
-                  backgroundColor="gray.400"
+                  key={index}
+                  backgroundColor="blue.400"
                   borderRadius={8}
                   paddingRight={1}
                   paddingLeft={1}
@@ -151,11 +134,10 @@ function StartupList(props) {
           >
             {hideRedditMessage() ? null : (
               <>
-                {" "}
                 <SiReddit size="1.3em" color="red" />
                 <Text ml={1} color="red">
                   {redditUsername}
-                </Text>{" "}
+                </Text>
               </>
             )}
           </Tag>

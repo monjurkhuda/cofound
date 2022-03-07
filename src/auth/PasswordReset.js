@@ -1,24 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase.js";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-  useToast,
-} from "@chakra-ui/react";
+import { Input, Text, Flex, Button, useToast } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
 
 function PasswordReset() {

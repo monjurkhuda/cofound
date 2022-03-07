@@ -3,23 +3,7 @@ import { withRouter, Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase.js";
 import { AuthContext } from "../Auth.js";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-} from "@chakra-ui/react";
+import { Input, Text, Flex, Button } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
 
 const SignIn = ({ history }) => {

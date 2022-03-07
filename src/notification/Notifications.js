@@ -2,37 +2,8 @@ import React, { useState, useEffect } from "react";
 import firebaseApp from "../firebase";
 import NotificationList from "./NotificationList.js";
 import Navigation from "../navigation/Navigation";
-
-import { useParams } from "react-router-dom";
-import { BiShieldQuarter } from "react-icons/bi";
-import { FaUserTie } from "react-icons/fa";
-import { SiReddit } from "react-icons/si";
 import Profile from "../userprofile/Profile";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-  Select,
-  Avatar,
-  useToast,
-  ButtonGroup,
-} from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
-import { AiOutlineSearch } from "react-icons/ai";
-import { HiSearchCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Text, Flex } from "@chakra-ui/react";
 
 function Notifications() {
   const [notifFilteredArray, setNotifFilteredArray] = useState([]);
@@ -66,7 +37,7 @@ function Notifications() {
         <Flex direction="column" p={6} w="100%">
           <Flex
             direction="column"
-            width="60vw"
+            width={["85vw", "85vw", "90vw", "60vw"]}
             height="fit-content"
             backgroundColor="white"
             boxShadow="base"
@@ -77,13 +48,11 @@ function Notifications() {
               <Text fontWeight="500" fontSize="md" color="gray.500">
                 Notifications:
               </Text>
-              <Table>
-                <Tbody>
-                  {notifFilteredArray.map((notifid) => {
-                    return <NotificationList key={notifid} notifid={notifid} />;
-                  })}
-                </Tbody>
-              </Table>
+              <Flex direction="column">
+                {notifFilteredArray.map((notifid) => {
+                  return <NotificationList key={notifid} notifid={notifid} />;
+                })}
+              </Flex>
             </Flex>
           </Flex>
         </Flex>

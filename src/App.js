@@ -2,6 +2,7 @@ import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./home/Home";
+import ResponsiveProfile from "./userprofile/ResponsiveProfile";
 import EditProfile from "./userprofile/EditProfile";
 import CreateProfile from "./userprofile/CreateProfile";
 import SignIn from "./auth/SignIn";
@@ -23,6 +24,7 @@ const App = () => {
     <ChakraProvider>
       <AuthProvider>
         <Router>
+          <PrivateRoute exact path="/profile" component={ResponsiveProfile} />
           <PrivateRoute exact path="/editprofile" component={EditProfile} />
           <PrivateRoute exact path="/createprofile" component={CreateProfile} />
           <Route exact path="/signin" component={SignIn} />

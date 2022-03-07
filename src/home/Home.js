@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  Box,
   Text,
   Flex,
   Button,
   Table,
-  Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
-  Td,
-  TableCaption,
-  Icon,
   Heading,
 } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
@@ -82,6 +76,7 @@ function Home() {
         padding={4}
         height="fit-content"
         backgroundColor="white"
+        wrap="wrap"
       >
         <Flex paddingLeft={2} paddingRight={2}>
           <Flex

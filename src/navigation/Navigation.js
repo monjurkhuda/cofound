@@ -1,26 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase";
-import {
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-} from "@chakra-ui/react";
+import { Text, Flex, Button, Stack } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
-import { FaRegUserCircle } from "react-icons/fa";
-import { BsShieldShaded, BsInbox } from "react-icons/bs";
-import { RiUserSearchLine } from "react-icons/ri";
-import { AiOutlineFileSearch } from "react-icons/ai";
+import { BsInbox } from "react-icons/bs";
+import { RiUser6Line } from "react-icons/ri";
 
 const Navigation = () => {
   const userid = firebaseApp.auth().currentUser?.uid;
@@ -47,12 +31,15 @@ const Navigation = () => {
   }
 
   return (
-    <Flex
+    <Stack
       justifyContent="space-around"
+      alignItems="center"
       w="100%"
       padding={4}
       height="fit-content"
       backgroundColor="white"
+      flexDir={["column", "row"]}
+      wrap="wrap"
     >
       <Link to="/searchstartups">
         <Flex>
@@ -86,7 +73,25 @@ const Navigation = () => {
               alignItems="center"
             >
               <VscRocket size="2rem" />
-              <Text ml={1}>/my startup</Text>
+              <Text ml={1} display={["none", "none", "flex"]}>
+                /my startup
+              </Text>
+            </Flex>
+          </Link>
+        </Flex>
+
+        <Flex
+          ml={8}
+          color="gray.400"
+          display={["flex", "flex", "flex", "none"]}
+        >
+          <Link to="/profile">
+            <Flex
+              alignContent="flex-end"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <RiUser6Line size="1.8rem" />
             </Flex>
           </Link>
         </Flex>
@@ -126,7 +131,7 @@ const Navigation = () => {
           </Button>
         </Link>
       </Flex>
-    </Flex>
+    </Stack>
   );
 };
 

@@ -53,6 +53,22 @@ function StartupList(props) {
     redditUsername,
   ]);
 
+  if (wantany === "yes") {
+    lookingForArray.push("any");
+  }
+  if (wanttech === "yes") {
+    lookingForArray.push("tech");
+  }
+  if (wantbiz === "yes") {
+    lookingForArray.push("biz");
+  }
+  if (wantsales === "yes") {
+    lookingForArray.push("sales");
+  }
+  if (wanthr === "yes") {
+    lookingForArray.push("hr");
+  }
+
   return (
     <Tr>
       <Td>
@@ -78,9 +94,10 @@ function StartupList(props) {
 
             <Flex mt={1}>
               <Text fontSize="xs">Hiring: </Text>
-              {lookingForArray.map((openPos) => (
+              {lookingForArray.map((openPos, index) => (
                 <Flex
-                  backgroundColor="gray.400"
+                  key={index}
+                  backgroundColor="blue.400"
                   borderRadius={8}
                   paddingRight={1}
                   paddingLeft={1}

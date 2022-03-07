@@ -51,6 +51,7 @@ function Profile() {
       p={4}
       minWidth="280px"
       maxWidth="300px"
+      display={["none", "none", "none", "flex", "flex"]}
     >
       <Text color="gray.500" fontWeight="500">
         My Profile

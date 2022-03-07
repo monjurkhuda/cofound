@@ -2,23 +2,7 @@ import React, { useCallback, useState } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-} from "@chakra-ui/react";
+import { Input, Text, Flex, Button } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
 
 const SignUp = ({ history }) => {

@@ -3,36 +3,15 @@ import { useParams } from "react-router-dom";
 import Navigation from "../navigation/Navigation";
 import firebaseApp from "../firebase";
 import { SiReddit } from "react-icons/si";
-import { ImUser } from "react-icons/im";
-import { BiShieldQuarter } from "react-icons/bi";
-import { FaUserTie } from "react-icons/fa";
-
 import Profile from "./Profile";
 import {
-  Input,
-  Box,
   Text,
   Flex,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
   Heading,
-  Select,
   Avatar,
   useToast,
-  ButtonGroup,
 } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
-import { AiOutlineSearch } from "react-icons/ai";
-import { HiSearchCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
 
 function UserProfile() {
   const [username, setUsername] = useState("");
@@ -134,7 +113,7 @@ function UserProfile() {
         <Flex direction="column" p={6} w="100%">
           <Flex
             direction="column"
-            width="60vw"
+            width={["86vw", "60vw"]}
             height="fit-content"
             backgroundColor="white"
             boxShadow="base"
@@ -190,23 +169,6 @@ function UserProfile() {
             >
               <Text color="gray.600">{bio}</Text>
             </Flex>
-            {/* <Flex direction="column" mt={4}>
-              <Text>Members:</Text>
-              <Table>
-                <Tbody>
-                  {rosterArray.map((userid) => {
-                    return (
-                      <Roster
-                        userid={userid}
-                        isFounder={false}
-                        founderid={founderid}
-                        startupid={startupid}
-                      />
-                    );
-                  })}
-                </Tbody>
-              </Table>
-            </Flex> */}
           </Flex>
         </Flex>
       </Flex>

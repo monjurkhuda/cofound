@@ -2,36 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navigation from "../navigation/Navigation";
 import Roster from "../Roster";
-import { BiShieldQuarter } from "react-icons/bi";
-import { FaUserTie } from "react-icons/fa";
 import { SiReddit } from "react-icons/si";
 import firebaseApp from "../firebase";
 import Profile from "../userprofile/Profile";
 import {
-  Input,
-  Box,
   Text,
   Flex,
   Button,
   Table,
-  Thead,
   Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
   Heading,
-  Select,
   Avatar,
   useToast,
-  ButtonGroup,
 } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
-import { AiOutlineSearch } from "react-icons/ai";
-import { HiSearchCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
 
 function StartupProfile() {
   const [startupname, setStartupname] = useState("");
@@ -43,7 +26,6 @@ function StartupProfile() {
   const [founderusername, setFounderusername] = useState("");
   const [redditusername, setRedditusername] = useState("");
   const [disabledRequestButton, setDisabledRequestButton] = useState(false);
-  const [isLoading, setLoading] = useState(true);
 
   const { startupid } = useParams("");
 
@@ -64,7 +46,6 @@ function StartupProfile() {
       setLongdescription(snapshot.val().longdescription);
       setLogourl(snapshot.val().logourl);
       setFounderid(snapshot.val().founderid);
-      setLoading(false);
     });
 
     const founderRef = db.ref().child("users/" + founderid);
@@ -74,8 +55,6 @@ function StartupProfile() {
         setRedditusername(snapshot.val().redditusername);
       }
     });
-
-    setLoading(false);
   }, [
     startupname,
     timezone,
@@ -158,7 +137,7 @@ function StartupProfile() {
         <Flex direction="column" p={6} w="100%">
           <Flex
             direction="column"
-            width="60vw"
+            width={["86vw", "60vw"]}
             height="fit-content"
             backgroundColor="white"
             boxShadow="base"

@@ -1,35 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebaseApp from "../firebase";
 import { Link } from "react-router-dom";
-
-import { useParams } from "react-router-dom";
-import { BiShieldQuarter } from "react-icons/bi";
-import { FaUserTie } from "react-icons/fa";
-import { SiReddit } from "react-icons/si";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-  Select,
-  Avatar,
-  useToast,
-  ButtonGroup,
-} from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
-import { AiOutlineSearch } from "react-icons/ai";
-import { HiSearchCircle } from "react-icons/hi";
+import { Text, Flex, Button, Tr, Td, useToast } from "@chakra-ui/react";
 import { BiEnvelope } from "react-icons/bi";
 import { FiUserPlus } from "react-icons/fi";
 
@@ -144,18 +116,28 @@ function NotificationList(props) {
 
   if (notifType === "REQUEST_TO_JOIN") {
     return (
-      <Tr backgroundColor="gray.100" borderBottom="2px" borderColor="white">
-        <Td>
-          <Flex>
-            <Flex mr={2}>
-              <FiUserPlus size={26} />
-            </Flex>
-            <Link style={{ textDecoration: "none" }} to={`/users/${senderid}`}>
-              <Text fontWeight="600">{`${senderUsername} wants to join your Startup!`}</Text>
-            </Link>
+      <Flex
+        direction={["column", "row"]}
+        backgroundColor="gray.100"
+        borderBottom="4px"
+        borderColor="white"
+        p={2}
+        w="100%"
+        justifyContent={["space-around", "space-between"]}
+      >
+        <Flex direction={["row", "column"]}>
+          <Flex mr={2}>
+            <FiUserPlus size={26} />
           </Flex>
-        </Td>
-        <Td>
+          <Link style={{ textDecoration: "none" }} to={`/users/${senderid}`}>
+            <Text fontWeight="600">{`${senderUsername} wants to join your Startup!`}</Text>
+          </Link>
+        </Flex>
+        <Flex
+          justifyContent={["space-around", "space-between"]}
+          mt={[4, 0]}
+          mb={[2, 0]}
+        >
           <Button
             backgroundColor="white"
             boxShadow="base"
@@ -164,36 +146,45 @@ function NotificationList(props) {
           >
             <Text>✔️</Text>
           </Button>
-        </Td>
-        <Td>
           <Button
             backgroundColor="black"
             boxShadow="base"
             size="sm"
             onClick={rejectUser}
+            ml={4}
           >
             <Text>❌</Text>
           </Button>
-        </Td>
-      </Tr>
+        </Flex>
+      </Flex>
     );
   } else {
     return (
-      <Tr backgroundColor="gray.100" borderBottom="4px" borderColor="white">
-        <Td>
-          <Flex>
-            <Flex mr={2}>
-              <BiEnvelope size={26} />
-            </Flex>
-            <Link
-              style={{ textDecoration: "none" }}
-              to={`/startups/${senderStartupid}`}
-            >
-              <Text fontWeight="500">{`${senderStartupname} invited you to join their Startup!`}</Text>
-            </Link>
+      <Flex
+        direction={["column", "row"]}
+        backgroundColor="gray.100"
+        borderBottom="4px"
+        borderColor="white"
+        p={2}
+        w="100%"
+        justifyContent={["space-around", "space-between"]}
+      >
+        <Flex direction={["row", "column"]}>
+          <Flex mr={2}>
+            <BiEnvelope size={26} />
           </Flex>
-        </Td>
-        <Td>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={`/startups/${senderStartupid}`}
+          >
+            <Text fontWeight="500">{`${senderStartupname} invited you to join their Startup!`}</Text>
+          </Link>
+        </Flex>
+        <Flex
+          justifyContent={["space-around", "space-between"]}
+          mt={[4, 0]}
+          mb={[2, 0]}
+        >
           <Button
             backgroundColor="white"
             boxShadow="base"
@@ -202,18 +193,17 @@ function NotificationList(props) {
           >
             ✔️
           </Button>
-        </Td>
-        <Td>
           <Button
             backgroundColor="black"
             boxShadow="base"
             size="sm"
             onClick={rejectStartup}
+            ml={4}
           >
             ❌
           </Button>
-        </Td>
-      </Tr>
+        </Flex>
+      </Flex>
     );
   }
 }

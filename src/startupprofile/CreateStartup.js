@@ -4,26 +4,13 @@ import firebaseApp from "../firebase.js";
 import Navigation from "../navigation/Navigation.js";
 import {
   Input,
-  Box,
-  Text,
   Flex,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tag,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
   Heading,
   Avatar,
   Select,
   Textarea,
 } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
 
 function CreateStartup() {
   const [startupname, setStartupname] = useState("");
@@ -81,7 +68,7 @@ function CreateStartup() {
       >
         <Flex
           direction="column"
-          width="60vw"
+          width={["86vw", "86vw", "60vw"]}
           height="fit-content"
           backgroundColor="white"
           boxShadow="base"
