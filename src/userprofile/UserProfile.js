@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Navigation from "./Navigation";
-import firebaseApp from "./firebase";
+import Navigation from "../navigation/Navigation";
+import firebaseApp from "../firebase";
 import { SiReddit } from "react-icons/si";
 import { ImUser } from "react-icons/im";
-import Roster from "./Roster";
 import { BiShieldQuarter } from "react-icons/bi";
 import { FaUserTie } from "react-icons/fa";
 
-import StartupList from "./StartupList";
 import Profile from "./Profile";
 import {
   Input,
@@ -213,54 +211,6 @@ function UserProfile() {
         </Flex>
       </Flex>
     </Flex>
-
-    // <div className="profile__container">
-    //   <div className="userprofile__username">
-    //     <ImUser size="1.2em" />
-    //     {username}
-    //   </div>
-    //   <div className="profile__inner__container">
-    //     <div className="profile__position__rating">
-    //       <div>{timezone}</div>
-    //       <div className="profile__rating">YOE: {yoeDisplayer()}</div>
-    //     </div>
-    //     <div className="profile__reddit">
-    //       <SiReddit size="1.8em" />
-    //       <span className="profile__reddit__text">{redditusername}</span>
-    //     </div>
-    //   </div>
-    //   <div className="userprofile__buttons">
-    //     <button
-    //       className="userprofile__button"
-    //       onClick={() => inviteUser()}
-    //       disabled={disabledInviteButton}
-    //     >
-    //       Invite +
-    //     </button>
-    //     <div className="userprofile__button">
-    //       <a
-    //         href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
-    //       >
-    //         <button
-    //           className="table__reddit__button"
-    //           hidden={hideRedditMessage()}
-    //         >
-    //           {hideRedditMessage() ? null : (
-    //             <button>
-    //               <SiReddit size="1.6em" /> {redditusername}
-    //             </button>
-    //           )}
-    //         </button>
-    //       </a>
-    //     </div>
-    //   </div>
-    //   <div className="playstyle__container">
-    //     <div className="playstyle__title">Bio:</div>
-    //     <div className="playstyle__body">{bio}</div>
-    //   </div>
-
-    //   <Navigation />
-    // </div>
   );
 }
 

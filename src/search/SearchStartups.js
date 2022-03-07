@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import StartupList from "./StartupList";
-import Navigation from "./Navigation";
-import Profile from "./Profile";
-import firebaseApp from "./firebase";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import StartupList from "../search/StartupList";
+import Navigation from "../navigation/Navigation";
+import Profile from "../userprofile/Profile";
+import firebaseApp from "../firebase";
 import {
   Input,
   Box,
@@ -27,7 +28,6 @@ import { HiSearchCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 function SearchStartups() {
-  const [startupname, setStartupname] = useState("");
   const [availablePos, setAvailablePos] = useState("wantany");
   const [timezone, setTimezone] = useState("USA");
   const [startupFilteredArray, setStartupFilteredArray] = useState([]);
@@ -35,7 +35,21 @@ function SearchStartups() {
   const senderid = firebaseApp.auth().currentUser.uid;
   const db = firebaseApp.database();
   const startupRef = db.ref("startups/");
+  const currentUserRef = db.ref("users/" + senderid);
   let startupArray = [];
+
+  let history = useHistory();
+  const [currentUsername, setCurrentUsername] = useState("");
+
+  useEffect(() => {
+    currentUserRef.once("value", (snapshot) => {
+      setCurrentUsername(snapshot.val()?.username);
+    });
+  }, [currentUsername]);
+
+  if (currentUsername === undefined) {
+    history.push("/createprofile");
+  }
 
   function searchHandler(e) {
     e.preventDefault();
@@ -135,13 +149,7 @@ function SearchStartups() {
                       Startups
                     </Text>
                   </Flex>
-                  <Flex
-                    className="search__option"
-                    ml={8}
-                    mt={1}
-                    width="fit-content"
-                    alignItems="center"
-                  >
+                  <Flex ml={8} mt={1} width="fit-content" alignItems="center">
                     <AiOutlineSearch size={20} />
                     <Link to="/searchfounders">
                       <Text fontSize={20} fontWeight="600">

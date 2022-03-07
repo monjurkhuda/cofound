@@ -1,8 +1,8 @@
 import React, { useCallback, useContext, useState } from "react";
 import { withRouter, Redirect } from "react-router";
 import { Link } from "react-router-dom";
-import firebaseApp from "./firebase.js";
-import { AuthContext } from "./Auth.js";
+import firebaseApp from "../firebase.js";
+import { AuthContext } from "../Auth.js";
 import {
   Input,
   Box,
@@ -69,26 +69,28 @@ const SignIn = ({ history }) => {
       alignItems="center"
       backgroundColor="gray.200"
     >
-      <Flex mt={10}>
-        <Flex
-          backgroundColor="blue.400"
-          height="fit-content"
-          borderRadius={20}
-          padding={2}
-        >
-          <VscRocket size={40} color="white" />
+      <Link to="/">
+        <Flex mt={10}>
+          <Flex
+            backgroundColor="blue.400"
+            height="fit-content"
+            borderRadius={20}
+            padding={2}
+          >
+            <VscRocket size={40} color="white" />
+          </Flex>
+          <Text
+            fontSize={40}
+            fontFamily="mono"
+            fontWeight={700}
+            letterSpacing="widest"
+            ml={2}
+            color="blue.700"
+          >
+            COFOUND
+          </Text>
         </Flex>
-        <Text
-          fontSize={40}
-          fontFamily="mono"
-          fontWeight={700}
-          letterSpacing="widest"
-          ml={2}
-          color="blue.700"
-        >
-          COFOUND
-        </Text>
-      </Flex>
+      </Link>
       <Text>Easily Find Co-Founders For Your Startup</Text>
       <Flex
         backgroundColor="white"
@@ -97,7 +99,7 @@ const SignIn = ({ history }) => {
         borderRadius={20}
         boxShadow="base"
       >
-        <form className="auth__form" onSubmit={handleSignIn}>
+        <form onSubmit={handleSignIn}>
           <Input name="email" type="email" placeholder="Email" />
           <Input
             mt={4}
@@ -127,13 +129,13 @@ const SignIn = ({ history }) => {
         </Text>
       </Flex>
 
-      <Link className="auth__link" to="/signup">
+      <Link to="/signup">
         <Text mt={2} color="blue.600" fontWeight="400">
           Don't have an account? Sign Up!
         </Text>
       </Link>
 
-      <Link className="auth__link" to="/passwordreset">
+      <Link to="/passwordreset">
         <Text mt={2} color="red.600" fontWeight="400">
           Forgot Password?
         </Text>

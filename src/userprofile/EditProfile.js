@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import firebaseApp from "./firebase.js";
-import Navigation from "./Navigation";
+import firebaseApp from "../firebase.js";
+import Navigation from "../navigation/Navigation";
 import {
   Input,
   Box,
@@ -21,6 +21,7 @@ import {
   Heading,
   Avatar,
   Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
 
@@ -74,7 +75,7 @@ function EditProfile() {
   }
 
   if (isLoading) {
-    return <div className="App">Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -115,13 +116,14 @@ function EditProfile() {
             onChange={(e) => setRedditusername(e.target.value)}
           ></Input>
 
-          <Input
+          <Textarea
             mt={2}
             value={bio}
             placeholder="Bio"
             maxLength="90"
+            resize="none"
             onChange={(e) => setBio(e.target.value)}
-          ></Input>
+          ></Textarea>
 
           <Flex alignItems="center" mt={2}>
             <Text fontWeight="600" color="gray.600">
@@ -202,98 +204,6 @@ function EditProfile() {
         </Flex>
       </Flex>
     </>
-
-    // <div>
-    //   <div className="editprofile__container">
-    //     <h3>Edit Profile</h3>
-    //     <div className="createprofile__system__timezone">
-    //       <input
-    //         className="createprofile__select"
-    //         placeholder="Username"
-    //         maxLength="20"
-    //         value={username}
-    //         onChange={(e) => setUsername(e.target.value)}
-    //       ></input>
-
-    //       <label>Main Role: </label>
-    //       <select
-    //         className="createprofile__select"
-    //         value={role}
-    //         onChange={(e) => setRole(e.target.value)}
-    //       >
-    //         <option defaultValue value="tech">
-    //           Tech
-    //         </option>
-    //         <option value="biz">Biz</option>
-    //         <option value="sales">Sales</option>
-    //         <option value="hr">HR</option>
-    //       </select>
-    //     </div>
-
-    //     <select
-    //       className="createprofile__select"
-    //       value={timezone}
-    //       onChange={(e) => setTimezone(e.target.value)}
-    //     >
-    //       <option defaultValue value="USA">
-    //         USA
-    //       </option>
-    //       <option value="EU">EU</option>
-    //       <option value="IND">IND</option>
-    //       <option value="AFR">AFR</option>
-    //     </select>
-
-    //     <input
-    //       className="createprofile__select"
-    //       placeholder="Reddit Username"
-    //       maxLength="20"
-    //       value={redditusername}
-    //       onChange={(e) => setRedditusername(e.target.value)}
-    //     ></input>
-
-    //     <div className="createprofile__position__positionrating">
-    //       <label>YOE: </label>
-
-    //       <select
-    //         className="createprofile__select"
-    //         value={yoe}
-    //         onChange={(e) => setYoe(e.target.value)}
-    //       >
-    //         <option value="0">0</option>
-    //         <option value="1">1</option>
-    //         <option value="2">2</option>
-    //         <option value="3">3</option>
-    //         <option value="4">4</option>
-    //         <option value="5">5</option>
-    //         <option value="6">6</option>
-    //         <option value="7">7</option>
-    //         <option value="8">8</option>
-    //         <option value="9">9</option>
-    //         <option value="10">10</option>
-    //         <option value="11">10+</option>
-    //       </select>
-    //     </div>
-
-    //     <input
-    //       className="createprofile__select"
-    //       placeholder="Bio"
-    //       maxLength="90"
-    //       value={bio}
-    //       onChange={(e) => setBio(e.target.value)}
-    //     ></input>
-
-    //     <div className="edit__buttons">
-    //       <button className="edit__save__button" onClick={saveHandler}>
-    //         + Save Changes
-    //       </button>
-
-    //       <button className="edit__cancel__button" onClick={cancelHandler}>
-    //         x Cancel
-    //       </button>
-    //     </div>
-    //   </div>
-    //   <Navigation />
-    // </div>
   );
 }
 

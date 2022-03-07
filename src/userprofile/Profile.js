@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import firebaseApp from "./firebase";
+import firebaseApp from "../firebase";
 import { SiReddit } from "react-icons/si";
 import { FiEdit2 } from "react-icons/fi";
 import { ImUser } from "react-icons/im";
@@ -40,12 +40,12 @@ function Profile() {
 
   useEffect(() => {
     profileRef.once("value", (snapshot) => {
-      setUsername(snapshot.val().username);
-      setRole(snapshot.val().role);
-      setYoe(snapshot.val().yoe);
-      setTimezone(snapshot.val().timezone);
-      setBio(snapshot.val().bio);
-      setRedditusername(snapshot.val().redditusername);
+      setUsername(snapshot.val()?.username);
+      setRole(snapshot.val()?.role);
+      setYoe(snapshot.val()?.yoe);
+      setTimezone(snapshot.val()?.timezone);
+      setBio(snapshot.val()?.bio);
+      setRedditusername(snapshot.val()?.redditusername);
     });
   }, [username, role, yoe, timezone, bio, redditusername]);
 

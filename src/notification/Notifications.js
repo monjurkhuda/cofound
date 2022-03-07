@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import firebaseApp from "./firebase";
+import firebaseApp from "../firebase";
 import NotificationList from "./NotificationList.js";
-import Navigation from "./Navigation";
+import Navigation from "../navigation/Navigation";
 
 import { useParams } from "react-router-dom";
-import Roster from "./Roster";
 import { BiShieldQuarter } from "react-icons/bi";
 import { FaUserTie } from "react-icons/fa";
 import { SiReddit } from "react-icons/si";
-import StartupList from "./StartupList";
-import Profile from "./Profile";
+import Profile from "../userprofile/Profile";
 import {
   Input,
   Box,
@@ -91,20 +89,6 @@ function Notifications() {
         </Flex>
       </Flex>
     </Flex>
-
-    // <div className="notifications__container">
-    //   <div className="notifications__title">Notifications:</div>
-    //   <div>
-    //     <table className="notificationtable">
-    //       <tbody>
-    //         {notifFilteredArray.map((notifid) => {
-    //           return <NotificationList key={notifid} notifid={notifid} />;
-    //         })}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    //   <Navigation />
-    // </div>
   );
 }
 

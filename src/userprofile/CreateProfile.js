@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import firebaseApp from "./firebase.js";
+import firebaseApp from "../firebase.js";
 import {
   Input,
   Box,
@@ -20,6 +20,7 @@ import {
   Heading,
   Avatar,
   Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
 
@@ -111,12 +112,13 @@ function CreateProfile() {
           onChange={(e) => setRedditusername(e.target.value)}
         ></Input>
 
-        <Input
+        <Textarea
           mt={2}
           placeholder="Bio"
           maxLength="90"
+          resize="none"
           onChange={(e) => setBio(e.target.value)}
-        ></Input>
+        ></Textarea>
 
         <Flex alignItems="center" mt={2}>
           <Text fontWeight="600" color="gray.600">

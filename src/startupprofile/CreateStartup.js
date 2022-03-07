@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import firebaseApp from "./firebase.js";
-import Navigation from "./Navigation.js";
+import firebaseApp from "../firebase.js";
+import Navigation from "../navigation/Navigation.js";
 import {
   Input,
   Box,
@@ -21,6 +21,7 @@ import {
   Heading,
   Avatar,
   Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
 
@@ -108,19 +109,22 @@ function CreateStartup() {
             <option value="AFR">AFR</option>
           </Select>
 
-          <Input
+          <Textarea
             mt={2}
-            placeholder="Short Description"
+            placeholder="Tagline"
             maxLength="80"
+            resize="none"
             onChange={(e) => setShortdescription(e.target.value)}
-          ></Input>
+          ></Textarea>
 
-          <Input
+          <Textarea
             mt={2}
-            placeholder="Long Description"
+            h={150}
+            placeholder="Description"
             maxLength="300"
+            resize="none"
             onChange={(e) => setLongdescription(e.target.value)}
-          ></Input>
+          ></Textarea>
 
           <Flex mt={2} alignItems="center">
             <Avatar src={logourl}></Avatar>
@@ -133,7 +137,11 @@ function CreateStartup() {
         </Flex>
 
         <Button
-          disabled={startupname.length < 1 || shortdescription.length < 1}
+          disabled={
+            startupname.length < 1 ||
+            shortdescription.length < 1 ||
+            longdescription.length < 1
+          }
           mt={6}
           colorScheme="yellow"
           onClick={createClubHandler}

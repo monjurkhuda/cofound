@@ -44,8 +44,6 @@ function Roster(props) {
   const memberRef = db.ref().child("members/" + startupid + "/" + userid);
   const startupRef = db.ref().child("startups/" + startupid);
 
-  console.log(isFounder, userid, myid, founderid);
-
   function hideRemoveButton() {
     if (userid === founderid || myid !== founderid) {
       return true;
@@ -78,7 +76,6 @@ function Roster(props) {
         <Flex>
           <Avatar
             size="md"
-            className="listlogo"
             src="https://i.pinimg.com/originals/37/c9/f5/37c9f5492e8219c5f91e2b3c28b74c92.png"
             alt="Startup Logo"
           ></Avatar>

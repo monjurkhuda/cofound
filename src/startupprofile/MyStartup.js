@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import firebaseApp from "./firebase";
-import Navigation from "./Navigation";
-import Roster from "./Roster";
-import StartupList from "./StartupList";
-import Profile from "./Profile";
+import firebaseApp from "../firebase";
+import Navigation from "../navigation/Navigation";
+import Roster from "../Roster";
+import Profile from "../userprofile/Profile";
 import {
   Input,
   Box,
@@ -91,7 +90,7 @@ function MyStartup() {
   }
 
   if (isLoading) {
-    return <div className="App">Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   function myStartupRenderer() {
@@ -177,59 +176,6 @@ function MyStartup() {
             </Flex>
           </Flex>
         </Flex>
-
-        // <div>
-        //   <div className="club__container">
-        //     <div className="club__inner__container">
-        //       <img width={100} src={logourl} alt="Startup Logo"></img>
-        //       <div>{timezone}</div>
-        //       <div className="clubname">
-        //         <BiShieldQuarter size="1.2em" />
-        //         {startupname}
-        //       </div>
-        //       <button
-        //         hidden={!isFounder}
-        //         className="club__button"
-        //         onClick={manageStartup}
-        //       >
-        //         Manage Startup
-        //       </button>
-        //       <button
-        //         hidden={isFounder}
-        //         className="club__button"
-        //         onClick={leaveStartup}
-        //       >
-        //         Leave Startup
-        //       </button>
-        //     </div>
-        //     <div className="playstyle__container">
-        //       <div className="playstyle__title">Short Description:</div>
-        //       <div className="playstyle__body">{shortdescription}</div>
-        //       <div className="playstyle__title">Long Description:</div>
-        //       <div className="playstyle__body">{longdescription}</div>
-        //     </div>
-
-        //     <div className="lineup__container">
-        //       <Table>
-        //         <Tbody>
-        //           {rosterArray.map((userid) => {
-        //             return (
-        //               <Roster
-        //                 userid={userid}
-        //                 isFounder={isFounder}
-        //                 founderid={founderid}
-        //                 startupid={startupid}
-        //               />
-        //             );
-        //           })}
-        //         </Tbody>
-        //       </Table>
-        //     </div>
-        //   </div>
-        //   <div className="nav__container">
-        //     <Navigation />
-        //   </div>
-        // </div>
       );
     } else {
       return (
@@ -269,16 +215,6 @@ function MyStartup() {
             </Flex>
           </Flex>
         </Flex>
-
-        // <div className="noclub__container">
-        //   <Link to="/createstartup">
-        //     <button className="club__button">Create Startup</button>
-        //   </Link>
-        //   <Link to="/searchstartups">
-        //     <button className="club__button">Find Startup</button>
-        //   </Link>
-        //   <Navigation />
-        // </div>
       );
     }
   }

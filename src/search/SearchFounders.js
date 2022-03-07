@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import UserList from "./UserList";
-import Navigation from "./Navigation";
-import firebaseApp from "./firebase";
-import Profile from "./Profile";
+import UserList from "../search/UserList";
+import Navigation from "../navigation/Navigation";
+import firebaseApp from "../firebase";
+import Profile from "../userprofile/Profile";
 import {
   Input,
   Box,
@@ -189,13 +189,7 @@ function SearchPlayers() {
             <Tbody>
               <Tr borderBottom="1px" borderColor="gray.100">
                 <Flex>
-                  <Flex
-                    className="search__option"
-                    ml={8}
-                    mt={1}
-                    width="fit-content"
-                    alignItems="center"
-                  >
+                  <Flex ml={8} mt={1} width="fit-content" alignItems="center">
                     <AiOutlineSearch size={20} />
                     <Link to="/searchstartups">
                       <Text fontSize={20} fontWeight="600">
@@ -232,91 +226,6 @@ function SearchPlayers() {
         </Flex>
       </Flex>
     </Flex>
-
-    // <Flex flexDir="column" h="100vh" backgroundColor="gray.200">
-    //   <Navigation />
-    //   <Flex flexDir="row">
-    //     <Flex w="30%">
-    //       <Profile />
-    //     </Flex>
-    //     <Flex>
-    //       <div>
-    //         <h4>Search Founders</h4>
-    //         <div>
-    //           <select onChange={(e) => setRole(e.target.value)}>
-    //             <option defaultValue value="tech">
-    //               Tech
-    //             </option>
-    //             <option value="biz">Biz</option>
-    //             <option value="sales">Sales</option>
-    //             <option value="hr">HR</option>
-    //           </select>
-    //         </div>
-
-    // <div>
-    //   <select
-    //     className="search__select"
-    //     onChange={(e) => setTimezone(e.target.value)}
-    //   >
-    //     <option defaultValue value="USA">
-    //       USA
-    //     </option>
-    //     <option value="EU">EU</option>
-    //     <option value="IND">IND</option>
-    //     <option value="AFR">AFR</option>
-    //   </select>
-
-    //           {"Min YOE: "}
-
-    // <select
-    //   className="createprofile__select"
-    //   value={yoe}
-    //   onChange={(e) => setYoe(e.target.value)}
-    // >
-    //   <option value="0">0</option>
-    //   <option value="1">1</option>
-    //   <option value="2">2</option>
-    //   <option value="3">3</option>
-    //   <option value="4">4</option>
-    //   <option value="5">5</option>
-    //   <option value="6">6</option>
-    //   <option value="7">7</option>
-    //   <option value="8">8</option>
-    //   <option value="9">9</option>
-    //   <option value="10">10</option>
-    //   <option value="11">10+</option>
-    // </select>
-
-    //           <button className="search__select" onClick={searchHandler}>
-    //             🔍
-    //           </button>
-    //         </div>
-
-    //         <div>
-    //           <input
-    //             className="search__select"
-    //             placeholder="EXACT Username..."
-    //             onChange={(e) => setUsername(e.target.value)}
-    //           ></input>
-
-    //           <button className="search__select" onClick={searchByUsername}>
-    //             🔍
-    //           </button>
-    //         </div>
-    //       </div>
-
-    //       <table>
-    //         <tbody>
-    //           {userFilteredArray.map((userid) => {
-    //             return (
-    //               <UserList key={userid} userid={userid} senderid={senderid} />
-    //             );
-    //           })}
-    //         </tbody>
-    //       </table>
-    //     </Flex>
-    //   </Flex>
-    // </Flex>
   );
 }
 

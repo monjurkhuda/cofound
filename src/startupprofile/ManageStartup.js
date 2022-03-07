@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import firebaseApp from "./firebase";
-import Navigation from "./Navigation";
+import firebaseApp from "../firebase";
+import Navigation from "../navigation/Navigation";
 
 import {
   Input,
@@ -26,6 +26,7 @@ import {
   FormLabel,
   TagLabel,
   Stack,
+  Textarea,
 } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
 
@@ -215,21 +216,24 @@ function ManageStartup() {
             <option value="AFR">AFR</option>
           </Select>
 
-          <Input
+          <Textarea
             mt={2}
             value={shortdescription}
             placeholder="Tagline"
             maxLength="80"
+            resize="none"
             onChange={(e) => setShortdescription(e.target.value)}
-          ></Input>
+          ></Textarea>
 
-          <Input
+          <Textarea
             mt={2}
             value={longdescription}
+            h={150}
+            resize="none"
             placeholder="Description"
             maxLength="300"
             onChange={(e) => setLongdescription(e.target.value)}
-          ></Input>
+          ></Textarea>
 
           <Text fontWeight="600" color="gray.600" mt={2}>
             Open Positions:
@@ -308,137 +312,6 @@ function ManageStartup() {
           </Button>
         </Flex>
       </Flex>
-
-      {/* <div>
-      <div className="manageclub__container">
-        <h3>Manage Startup</h3>
-
-        <div className="editclub__container">
-          <div className="editclub__system__timezone">
-            <input
-              className="createclub__select"
-              placeholder="Startup Name"
-              maxLength="20"
-              value={startupname}
-              onChange={(e) => setStartupname(e.target.value)}
-            ></input>
-
-            <select
-              className="createprofile__select"
-              value={timezone}
-              onChange={(e) => setTimezone(e.target.value)}
-            >
-              <option defaultValue value="USA">
-                USA
-              </option>
-              <option value="EU">EU</option>
-              <option value="IND">IND</option>
-              <option value="AFR">AFR</option>
-            </select>
-
-            <input
-              className="createclub__select"
-              placeholder="Short Description"
-              maxLength="80"
-              value={shortdescription}
-              onChange={(e) => setShortdescription(e.target.value)}
-            ></input>
-
-            <input
-              className="createclub__select"
-              placeholder="Long Description"
-              maxLength="300"
-              value={longdescription}
-              onChange={(e) => setLongdescription(e.target.value)}
-            ></input>
-
-            <img width={100} src={logourl} alt="Startup Logo"></img>
-
-            <input
-              className="createclub__select"
-              placeholder="Logo Url"
-              value={logourl}
-              onChange={(e) => setLogourl(e.target.value)}
-            ></input>
-          </div>
-        </div>
-
-        <div className="open__positions">
-          <div>Open Positions:</div>
-          <div className="open__positions__checkbox">
-            <input
-              className="open__positions__checkbox"
-              type="checkbox"
-              name="any"
-              defaultChecked={wantany === "yes" ? true : false}
-              onChange={(e) => posAvailabilitySetter(e)}
-            ></input>
-            <label for="any">ANY</label>
-          </div>
-
-          <div className="open__positions__checkbox">
-            <input
-              className="open__positions__checkbox"
-              type="checkbox"
-              name="tech"
-              defaultChecked={wanttech === "yes" ? true : false}
-              onChange={(e) => posAvailabilitySetter(e)}
-            ></input>
-            <label for="tech">Tech</label>
-          </div>
-
-          <div className="open__positions__checkbox">
-            <input
-              className="open__positions__checkbox"
-              type="checkbox"
-              name="biz"
-              defaultChecked={wantbiz === "yes" ? true : false}
-              onChange={(e) => posAvailabilitySetter(e)}
-            ></input>
-            <label for="biz">Biz</label>
-          </div>
-
-          <div className="open__positions__checkbox">
-            <input
-              className="open__positions__checkbox"
-              type="checkbox"
-              name="sales"
-              defaultChecked={wantsales === "yes" ? true : false}
-              onChange={(e) => posAvailabilitySetter(e)}
-            ></input>
-            <label for="sales">Sales</label>
-          </div>
-
-          <div className="open__positions__checkbox">
-            <input
-              className="open__positions__checkbox"
-              type="checkbox"
-              name="hr"
-              defaultChecked={wanthr === "yes" ? true : false}
-              onChange={(e) => posAvailabilitySetter(e)}
-            ></input>
-            <label for="hr">HR</label>
-          </div>
-        </div>
-
-        <div className="manageclub__buttons">
-          <button className="manageclub__save__button" onClick={saveHandler}>
-            Save
-          </button>
-          <button
-            className="manageclub__cancel__button"
-            onClick={cancelHandler}
-          >
-            Cancel
-          </button>
-        </div>
-        <button className="deleteclub__button" onClick={deleteStartup}>
-          💀 Delete Startup
-        </button>
-      </div>
-
-      <Navigation />
-    </div> */}
     </>
   );
 }

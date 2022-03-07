@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Navigation from "./Navigation";
-import Roster from "./Roster";
+import Navigation from "../navigation/Navigation";
+import Roster from "../Roster";
 import { BiShieldQuarter } from "react-icons/bi";
 import { FaUserTie } from "react-icons/fa";
 import { SiReddit } from "react-icons/si";
-import firebaseApp from "./firebase";
-import StartupList from "./StartupList";
-import Profile from "./Profile";
+import firebaseApp from "../firebase";
+import Profile from "../userprofile/Profile";
 import {
   Input,
   Box,
@@ -236,66 +235,6 @@ function StartupProfile() {
         </Flex>
       </Flex>
     </Flex>
-
-    // <div className="club__container">
-    //   <div className="club__inner__container">
-    //     <img width={100} src={logourl} alt="Startup Logo"></img>
-    //     <div>{timezone}</div>
-    //     <div className="clubname">
-    //       <BiShieldQuarter size="1.2em" />
-    //       {startupname}
-    //     </div>
-    //     <div>
-    //       <FaUserTie size="1.2em" />
-    //       {founderusername}
-    //     </div>
-    // <button
-    //   className="club__button"
-    //   onClick={() => requestToJoin()}
-    //   disabled={disabledRequestButton}
-    // >
-    //   Request To Join
-    // </button>
-    //     <div className="clubprofile__reddit__button">
-    //       <a
-    //         href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
-    //       >
-    //         <button hidden={hideRedditMessage()}>
-    //           {hideRedditMessage() ? null : (
-    //             <button>
-    //               <SiReddit size="1.6em" /> {redditusername}
-    //             </button>
-    //           )}
-    //         </button>
-    //       </a>
-    //     </div>
-    //   </div>
-
-    //   <div className="playstyle__container">
-    //     <div className="playstyle__title">Short Description:</div>
-    //     <div className="playstyle__body">{shortdescription}</div>
-    //     <div className="playstyle__title">Long Description:</div>
-    //     <div className="playstyle__body">{longdescription}</div>
-    //   </div>
-
-    // <div className="lineup__container">
-    //   <table>
-    //     <tbody>
-    //       {rosterArray.map((userid) => {
-    //         return (
-    //           <Roster
-    //             userid={userid}
-    //             isFounder={false}
-    //             founderid={founderid}
-    //             startupid={startupid}
-    //           />
-    //         );
-    //       })}
-    //     </tbody>
-    //   </table>
-    // </div>
-    //   <Navigation />
-    // </div>
   );
 }
 

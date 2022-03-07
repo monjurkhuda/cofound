@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
-import firebaseApp from "./firebase";
+import firebaseApp from "../firebase";
 import { Link } from "react-router-dom";
 
-import Navigation from "./Navigation";
-
 import { useParams } from "react-router-dom";
-import Roster from "./Roster";
 import { BiShieldQuarter } from "react-icons/bi";
 import { FaUserTie } from "react-icons/fa";
 import { SiReddit } from "react-icons/si";
-import StartupList from "./StartupList";
-import Profile from "./Profile";
 import {
   Input,
   Box,
@@ -192,7 +187,7 @@ function NotificationList(props) {
             </Flex>
             <Link
               style={{ textDecoration: "none" }}
-              to={`/startups/${senderid}`}
+              to={`/startups/${senderStartupid}`}
             >
               <Text fontWeight="500">{`${senderStartupname} invited you to join their Startup!`}</Text>
             </Link>

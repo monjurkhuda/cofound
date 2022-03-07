@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebaseApp from "./firebase";
-import { Link } from "react-router-dom";
-import { SiReddit } from "react-icons/si";
 import {
-  Avatar,
-  Tag,
-  Input,
   Box,
   Text,
   Flex,
@@ -18,18 +12,22 @@ import {
   Th,
   Td,
   TableCaption,
-  Icon,
-  Heading,
-  useToast,
+  Tag,
+  Avatar,
+  AvatarBadge,
+  Tooltip,
 } from "@chakra-ui/react";
+import firebaseApp from "../firebase";
+import { Link } from "react-router-dom";
+import { SiReddit } from "react-icons/si";
 
 function StartupList(props) {
+  const [founderUsername, setFounderUsername] = useState("");
+  const [redditUsername, setRedditUsername] = useState("");
   const [logourl, setLogourl] = useState("");
   const [startupname, setStartupname] = useState("");
   const [timezone, setTimezone] = useState("");
   const [shortdescription, setShortdescription] = useState("");
-  const [founderUsername, setFounderUsername] = useState("");
-  const [redditUsername, setRedditUsername] = useState("");
   const [founderid, setFounderid] = useState("");
   const [wantany, setWantany] = useState("");
   const [wanttech, setWanttech] = useState("");
@@ -37,15 +35,10 @@ function StartupList(props) {
   const [wantsales, setWantsales] = useState("");
   const [wanthr, setWanthr] = useState("");
 
-  const [disabledJoinButton, setDisabledJoinButton] = useState(false);
-
-  const senderid = props.senderid;
   const startupid = props.startupid;
   const db = firebaseApp.database();
   const allStartupsRef = db.ref("/startups");
   const startupRef = db.ref().child("startups/" + startupid);
-
-  const toast = useToast();
 
   var lookingForArray = [];
 
@@ -79,43 +72,6 @@ function StartupList(props) {
     redditUsername,
   ]);
 
-  const receiverid = founderid;
-  const notifRef = db.ref().child("notifications/" + receiverid);
-
-  function requestToJoin() {
-    allStartupsRef
-      .orderByChild("founderid")
-      .equalTo(senderid)
-      .once("value", async function (snapshot) {
-        const doesSnapshotHaveData = await snapshot.val();
-        if (doesSnapshotHaveData) {
-          alert("You must delete your startup before you can join another.");
-          return;
-        } else {
-          notifRef
-            .orderByChild("senderid")
-            .equalTo(senderid)
-            .once("value", async function (snapshot) {
-              const doesSnapshotHaveData = await snapshot.val();
-              if (!doesSnapshotHaveData) {
-                notifRef.push({
-                  notiftype: "REQUEST_TO_JOIN",
-                  senderid: senderid,
-                });
-              }
-            });
-          setDisabledJoinButton(true);
-          toast({
-            title: "Join Request",
-            description: "Request to join startup was sent!",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
-        }
-      });
-  }
-
   function hideRedditMessage() {
     return redditUsername?.length === 0 ? true : false;
   }
@@ -140,14 +96,9 @@ function StartupList(props) {
     <Tr>
       <Td>
         <Flex>
-          <Avatar
-            size="lg"
-            className="listlogo"
-            src={logourl}
-            alt="Startup Logo"
-          ></Avatar>
+          <Avatar size="lg" src={logourl} alt="Startup Logo"></Avatar>
 
-          <Flex direction="column" ml={3} w="100%">
+          <Flex direction="column" ml={3}>
             <Flex>
               <Link
                 style={{ textDecoration: "none" }}
@@ -161,10 +112,15 @@ function StartupList(props) {
                 {timezone}
               </Text>
             </Flex>
-
-            <Text fontSize="xs">{shortdescription}</Text>
-
-            <Flex mt={1}>
+            <Flex
+              backgroundColor="gray.50"
+              padding={1}
+              margin="2px 0px 2px 0px"
+              borderRadius={5}
+            >
+              <Text fontSize="xs">{shortdescription}</Text>
+            </Flex>
+            <Flex>
               <Text fontSize="xs">Hiring: </Text>
               {lookingForArray.map((openPos) => (
                 <Flex
@@ -182,6 +138,28 @@ function StartupList(props) {
             </Flex>
           </Flex>
         </Flex>
+      </Td>
+
+      <Td>
+        <a
+          href={`https://www.reddit.com/message/compose/?to=${redditUsername}`}
+        >
+          <Tag
+            hidden={hideRedditMessage()}
+            backgroundColor="white"
+            boxShadow="base"
+          >
+            {hideRedditMessage() ? null : (
+              <>
+                {" "}
+                <SiReddit size="1.3em" color="red" />
+                <Text ml={1} color="red">
+                  {redditUsername}
+                </Text>{" "}
+              </>
+            )}
+          </Tag>
+        </a>
       </Td>
     </Tr>
   );
