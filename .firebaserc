@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "proklubz-c86b9"
-  }
+    "default": "cofounder-match",
+    "cofound": "cofounder-match"
+  },
+  "targets": {}
 }

@@ -66,7 +66,8 @@ function Home() {
   return (
     <Flex
       flexDir="column"
-      h="100vh"
+      h="100%"
+      minHeight="100vh"
       alignItems="center"
       backgroundColor="gray.200"
     >
@@ -185,6 +186,7 @@ function Home() {
         width="60%"
         size="md"
         mt={8}
+        mb={8}
         boxShadow="base"
       >
         <Tbody>
