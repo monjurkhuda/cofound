@@ -4,6 +4,7 @@
 [x] notification badge doesn't show on refresh
 [x] make ui responsive
 [x] implement profile images
-[ ] pagination
+[x] pagination
 
 [ ] users can create more than one startups and profiles
+[ ] side profile height linked to table

@@ -24,6 +24,9 @@ function SearchStartups() {
   const [availablePos, setAvailablePos] = useState("wantany");
   const [timezone, setTimezone] = useState("USA");
   const [startupFilteredArray, setStartupFilteredArray] = useState([]);
+  const [lowerRange, setLowerRange] = useState(0);
+  const [higherRange, setHigherRange] = useState(5);
+  const [showPaginationButtons, setShowPaginationButtons] = useState(false);
 
   const senderid = firebaseApp.auth().currentUser.uid;
   const db = firebaseApp.database();
@@ -59,6 +62,8 @@ function SearchStartups() {
         });
         setStartupFilteredArray(startupArray);
       });
+
+    setShowPaginationButtons(true);
   }
 
   return (
@@ -124,11 +129,46 @@ function SearchStartups() {
             </Flex>
           </Stack>
 
+          <Flex mt={3} justifyContent="flex-end">
+            {lowerRange !== 0 ? (
+              <Button
+                backgroundColor="white"
+                boxShadow="base"
+                size="xs"
+                onClick={() => {
+                  setHigherRange(higherRange - 5);
+                  setLowerRange(lowerRange - 5);
+                }}
+              >
+                {"<"}
+              </Button>
+            ) : (
+              <></>
+            )}
+
+            {showPaginationButtons ? (
+              <Button
+                ml={3}
+                backgroundColor="white"
+                boxShadow="base"
+                size="xs"
+                onClick={() => {
+                  setHigherRange(higherRange + 5);
+                  setLowerRange(lowerRange + 5);
+                }}
+              >
+                {">"}
+              </Button>
+            ) : (
+              <></>
+            )}
+          </Flex>
+
           <Table
             variant="simple"
             backgroundColor="white"
             size="md"
-            mt={5}
+            mt={3}
             boxShadow="base"
             w={["85vw", "85vw", "90vw", "60vw"]}
           >
@@ -178,15 +218,17 @@ function SearchStartups() {
               <Tr backgroundColor="gray.50">
                 <Th>Startups</Th>
               </Tr>
-              {startupFilteredArray.map((startupid) => {
-                return (
-                  <StartupList
-                    key={startupid}
-                    senderid={senderid}
-                    startupid={startupid}
-                  />
-                );
-              })}
+              {startupFilteredArray
+                .slice(lowerRange, higherRange)
+                .map((startupid) => {
+                  return (
+                    <StartupList
+                      key={startupid}
+                      senderid={senderid}
+                      startupid={startupid}
+                    />
+                  );
+                })}
             </Tbody>
           </Table>
         </Flex>

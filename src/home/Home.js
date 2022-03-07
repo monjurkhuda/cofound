@@ -35,7 +35,7 @@ function Home() {
 
     startupRef
       .orderByChild("createdat")
-      .limitToLast(20)
+      .limitToLast(5)
       .on("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
           startupArray.push(childSnapshot.key);
