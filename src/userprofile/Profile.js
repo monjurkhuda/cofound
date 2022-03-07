@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase";
-import { SiReddit } from "react-icons/si";
+import { SiTwitter } from "react-icons/si";
 import { FiEdit2 } from "react-icons/fi";
 import { Text, Flex, Button, Tag, Avatar } from "@chakra-ui/react";
 
@@ -11,7 +11,7 @@ function Profile() {
   const [role, setRole] = useState("tech");
   const [yoe, setYoe] = useState(0);
   const [timezone, setTimezone] = useState("USA");
-  const [redditusername, setRedditusername] = useState("");
+  const [twitter, setTwitter] = useState("");
   const [bio, setBio] = useState("");
 
   const userid = firebaseApp.auth().currentUser.uid;
@@ -26,9 +26,9 @@ function Profile() {
       setYoe(snapshot.val()?.yoe);
       setTimezone(snapshot.val()?.timezone);
       setBio(snapshot.val()?.bio);
-      setRedditusername(snapshot.val()?.redditusername);
+      setTwitter(snapshot.val().twitter);
     });
-  }, [username, role, yoe, timezone, bio, redditusername]);
+  }, [username, role, yoe, timezone, bio, twitter]);
 
   function yoeDisplayer() {
     if (yoe === "11") {
@@ -38,8 +38,8 @@ function Profile() {
     }
   }
 
-  function hideReddit() {
-    return redditusername?.length === 0 ? true : false;
+  function hideTwitter() {
+    return twitter?.length === 0 ? true : false;
   }
 
   return (
@@ -84,11 +84,11 @@ function Profile() {
           {username}
         </Text>
         <Flex m={4}>
-          <Tag hidden={hideReddit()} backgroundColor="white" boxShadow="base">
-            {hideReddit() ? null : (
+          <Tag hidden={hideTwitter()} backgroundColor="white" boxShadow="base">
+            {hideTwitter() ? null : (
               <>
-                <SiReddit size="1.3em" />
-                {`${redditusername}`}
+                <SiTwitter size="1.3em" />
+                {`${twitter}`}
               </>
             )}
           </Tag>

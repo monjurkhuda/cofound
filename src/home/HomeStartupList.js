@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Text, Flex, Tr, Td, Tag, Avatar } from "@chakra-ui/react";
 import firebaseApp from "../firebase";
 import { Link } from "react-router-dom";
-import { SiReddit } from "react-icons/si";
+import { SiTwitter } from "react-icons/si";
 
 function StartupList(props) {
   const [founderUsername, setFounderUsername] = useState("");
-  const [redditUsername, setRedditUsername] = useState("");
+  const [twitter, setTwitter] = useState("");
   const [logourl, setLogourl] = useState("");
   const [startupname, setStartupname] = useState("");
   const [timezone, setTimezone] = useState("");
@@ -41,21 +41,20 @@ function StartupList(props) {
     const founderRef = db.ref().child("users/" + founderid);
     founderRef.once("value", (snapshot) => {
       setFounderUsername(snapshot.val().username);
-      setRedditUsername(snapshot.val().redditusername);
+      setTwitter(snapshot.val().twitter);
     });
   }, [
     logourl,
     startupname,
     timezone,
     shortdescription,
-    redditUsername,
+    twitter,
     founderid,
     founderUsername,
-    redditUsername,
   ]);
 
-  function hideRedditMessage() {
-    return redditUsername?.length === 0 ? true : false;
+  function hideTwitter() {
+    return twitter?.length === 0 ? true : false;
   }
 
   if (wantany === "yes") {
@@ -121,27 +120,6 @@ function StartupList(props) {
             </Flex>
           </Flex>
         </Flex>
-      </Td>
-
-      <Td>
-        <a
-          href={`https://www.reddit.com/message/compose/?to=${redditUsername}`}
-        >
-          <Tag
-            hidden={hideRedditMessage()}
-            backgroundColor="white"
-            boxShadow="base"
-          >
-            {hideRedditMessage() ? null : (
-              <>
-                <SiReddit size="1.3em" color="red" />
-                <Text ml={1} color="red">
-                  {redditUsername}
-                </Text>
-              </>
-            )}
-          </Tag>
-        </a>
       </Td>
     </Tr>
   );

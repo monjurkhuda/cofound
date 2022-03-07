@@ -192,7 +192,6 @@ function Home() {
         <Tbody>
           <Tr>
             <Th>Latest Startups</Th>
-            <Th>Contact</Th>
           </Tr>
           {startupFilteredArray.map((startupid) => {
             return <HomeStartupList key={startupid} startupid={startupid} />;

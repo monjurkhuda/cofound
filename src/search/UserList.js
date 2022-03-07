@@ -11,7 +11,7 @@ function UserList(props) {
   const [role, setRole] = useState("tech");
   const [yoe, setYoe] = useState(0);
   const [timezone, setTimezone] = useState("USA");
-  const [redditusername, setRedditusername] = useState("");
+  const [twitter, setTwitter] = useState("");
   const [bio, setBio] = useState("");
   const [founderStartupname, setFounderStartupname] = useState();
 
@@ -29,7 +29,7 @@ function UserList(props) {
       setRole(snapshot.val().role);
       setYoe(snapshot.val().yoe);
       setTimezone(snapshot.val().timezone);
-      setRedditusername(snapshot.val().redditusername);
+      setTwitter(snapshot.val().twitter);
       setBio(snapshot.val().bio);
     });
 
@@ -48,7 +48,7 @@ function UserList(props) {
     role,
     yoe,
     timezone,
-    redditusername,
+    twitter,
     bio,
     founderStartupname,
   ]);

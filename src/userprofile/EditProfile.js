@@ -19,7 +19,7 @@ function EditProfile() {
   const [role, setRole] = useState("");
   const [yoe, setYoe] = useState("");
   const [timezone, setTimezone] = useState("");
-  const [redditusername, setRedditusername] = useState("");
+  const [twitter, setTwitter] = useState("");
   const [bio, setBio] = useState("");
   const [isLoading, setLoading] = useState(true);
 
@@ -35,7 +35,7 @@ function EditProfile() {
       setRole(snapshot.val().role);
       setYoe(snapshot.val().yoe);
       setTimezone(snapshot.val().timezone);
-      setRedditusername(snapshot.val().redditusername);
+      setTwitter(snapshot.val().twitter);
       setBio(snapshot.val().bio);
       setLoading(false);
     });
@@ -52,7 +52,7 @@ function EditProfile() {
       role: role,
       yoe: yoe,
       timezone: timezone,
-      redditusername: redditusername,
+      twitter: twitter,
       bio: bio,
     });
 
@@ -110,10 +110,10 @@ function EditProfile() {
 
           <Input
             mt={2}
-            value={redditusername}
-            placeholder="Reddit Username"
+            value={twitter}
+            placeholder="Twitter"
             maxLength="20"
-            onChange={(e) => setRedditusername(e.target.value)}
+            onChange={(e) => setTwitter(e.target.value)}
           ></Input>
 
           <Textarea

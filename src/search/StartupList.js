@@ -9,7 +9,7 @@ function StartupList(props) {
   const [timezone, setTimezone] = useState("");
   const [shortdescription, setShortdescription] = useState("");
   const [founderUsername, setFounderUsername] = useState("");
-  const [redditUsername, setRedditUsername] = useState("");
+  const [twitter, setTwitter] = useState("");
   const [founderid, setFounderid] = useState("");
   const [wantany, setWantany] = useState("");
   const [wanttech, setWanttech] = useState("");
@@ -40,17 +40,16 @@ function StartupList(props) {
     const founderRef = db.ref().child("users/" + founderid);
     founderRef.once("value", (snapshot) => {
       setFounderUsername(snapshot.val().username);
-      setRedditUsername(snapshot.val().redditusername);
+      setTwitter(snapshot.val().twitter);
     });
   }, [
     logourl,
     startupname,
     timezone,
     shortdescription,
-    redditUsername,
+    twitter,
     founderid,
     founderUsername,
-    redditUsername,
   ]);
 
   if (wantany === "yes") {

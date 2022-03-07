@@ -19,7 +19,7 @@ function CreateProfile() {
   const [role, setRole] = useState("tech");
   const [yoe, setYoe] = useState(0);
   const [timezone, setTimezone] = useState("USA");
-  const [redditusername, setRedditusername] = useState("");
+  const [twitter, setTwitter] = useState("");
   const [bio, setBio] = useState("");
   const [startupid] = useState("");
 
@@ -37,7 +37,7 @@ function CreateProfile() {
       role: role,
       yoe: yoe,
       timezone: timezone,
-      redditusername: redditusername,
+      twitter: twitter,
       bio: bio,
       startupid: startupid,
       createdat: Date.now(),
@@ -107,9 +107,9 @@ function CreateProfile() {
 
         <Input
           mt={2}
-          placeholder="Reddit Username"
+          placeholder="Twitter"
           maxLength="20"
-          onChange={(e) => setRedditusername(e.target.value)}
+          onChange={(e) => setTwitter(e.target.value)}
         ></Input>
 
         <Textarea

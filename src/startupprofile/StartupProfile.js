@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navigation from "../navigation/Navigation";
 import Roster from "../Roster";
-import { SiReddit } from "react-icons/si";
+import { SiTwitter } from "react-icons/si";
 import firebaseApp from "../firebase";
 import Profile from "../userprofile/Profile";
 import {
@@ -24,7 +24,7 @@ function StartupProfile() {
   const [logourl, setLogourl] = useState("");
   const [founderid, setFounderid] = useState("");
   const [founderusername, setFounderusername] = useState("");
-  const [redditusername, setRedditusername] = useState("");
+  const [twitter, setTwitter] = useState("");
   const [disabledRequestButton, setDisabledRequestButton] = useState(false);
 
   const { startupid } = useParams("");
@@ -51,8 +51,8 @@ function StartupProfile() {
     const founderRef = db.ref().child("users/" + founderid);
     founderRef.once("value", (snapshot) => {
       setFounderusername(snapshot.val().username);
-      if (snapshot.val().redditusername) {
-        setRedditusername(snapshot.val().redditusername);
+      if (snapshot.val().twitter) {
+        setTwitter(snapshot.val().twitter);
       }
     });
   }, [
@@ -63,7 +63,7 @@ function StartupProfile() {
     logourl,
     founderid,
     founderusername,
-    redditusername,
+    twitter,
   ]);
 
   const lineupRef = db.ref().child("members/" + startupid);
@@ -118,8 +118,8 @@ function StartupProfile() {
       });
   }
 
-  function hideRedditMessage() {
-    return redditusername.length === 0 ? true : false;
+  function hideTwitter() {
+    return twitter.length === 0 ? true : false;
   }
 
   return (
@@ -163,19 +163,17 @@ function StartupProfile() {
               <Text fontSize="sm" fontWeight="500" color="gray.600">
                 Contact:
               </Text>
-              <a
-                href={`https://www.reddit.com/message/compose/?to=${redditusername}`}
-              >
-                {hideRedditMessage() ? null : (
+              <a href={`https://twitter.com/${twitter}`}>
+                {hideTwitter() ? null : (
                   <Button
                     ml={2}
                     size="xs"
                     backgroundColor="white"
                     boxShadow="base"
-                    color="red"
+                    color="blue.400"
                   >
-                    <SiReddit size={14} />
-                    <Text ml={1}>{redditusername}</Text>
+                    <SiTwitter size={14} />
+                    <Text ml={1}>{twitter}</Text>
                   </Button>
                 )}
               </a>
