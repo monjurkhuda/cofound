@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 function UserProfile() {
+  const [logourl, setLogourl] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("tech");
   const [yoe, setYoe] = useState(0);
@@ -34,6 +35,7 @@ function UserProfile() {
 
   useEffect(() => {
     userRef.once("value", (snapshot) => {
+      setLogourl(snapshot.val().logourl);
       setUsername(snapshot.val().username);
       setRole(snapshot.val().role);
       setYoe(snapshot.val().yoe);
@@ -121,7 +123,7 @@ function UserProfile() {
             padding={4}
           >
             <Flex alignItems="center" justifyContent="space-between">
-              <Avatar size="xl" />
+              <Avatar src={logourl} size="xl" />
               <Button
                 size="sm"
                 boxShadow="base"
@@ -134,7 +136,7 @@ function UserProfile() {
             </Flex>
             <Flex>
               <Heading size="lg">{username}</Heading>
-              <Text>{timezone}</Text>
+              <Text ml={2}>{timezone}</Text>
             </Flex>
             <Text fontSize="xs">
               {yoeDisplayer()} years of experience in {role}

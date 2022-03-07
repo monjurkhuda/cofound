@@ -3,20 +3,9 @@ import { useHistory } from "react-router-dom";
 import firebaseApp from "../firebase.js";
 import {
   Input,
-  Box,
   Text,
   Flex,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tag,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
   Heading,
   Avatar,
   Select,
@@ -25,6 +14,7 @@ import {
 import { VscRocket } from "react-icons/vsc";
 
 function CreateProfile() {
+  const [logourl, setLogourl] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("tech");
   const [yoe, setYoe] = useState(0);
@@ -42,6 +32,7 @@ function CreateProfile() {
     e.preventDefault();
 
     userRef.set({
+      logourl: logourl,
       username: username,
       role: role,
       yoe: yoe,
@@ -98,6 +89,15 @@ function CreateProfile() {
         <Heading size="lg" color="blue.700">
           Create Your Profile
         </Heading>
+
+        <Avatar size="lg" src={logourl}></Avatar>
+
+        <Input
+          mt={2}
+          placeholder="Logo Url"
+          onChange={(e) => setLogourl(e.target.value)}
+        ></Input>
+
         <Input
           mt={2}
           placeholder="Username"

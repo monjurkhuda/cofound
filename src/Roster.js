@@ -5,6 +5,7 @@ import { Text, Flex, Button, Tr, Td, Avatar, Stack } from "@chakra-ui/react";
 import { GiConverseShoe } from "react-icons/gi";
 
 function Roster(props) {
+  const [logourl, setLogourl] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
   const [yoe, setYoe] = useState();
@@ -31,6 +32,7 @@ function Roster(props) {
 
   useEffect(() => {
     userRef.once("value", (snapshot) => {
+      setLogourl(snapshot.val().logourl);
       setUsername(snapshot.val().username);
       setRole(snapshot.val().role);
       setYoe(snapshot.val().yoe);
@@ -50,11 +52,7 @@ function Roster(props) {
     <Tr>
       <Td>
         <Flex>
-          <Avatar
-            size="md"
-            src="https://i.pinimg.com/originals/37/c9/f5/37c9f5492e8219c5f91e2b3c28b74c92.png"
-            alt="Startup Logo"
-          ></Avatar>
+          <Avatar size="md" src={logourl}></Avatar>
 
           <Flex direction="column" ml={3} w="100%">
             <Flex>

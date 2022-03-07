@@ -6,6 +6,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { Text, Flex, Button, Tag, Avatar } from "@chakra-ui/react";
 
 function Profile() {
+  const [logourl, setLogourl] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("tech");
   const [yoe, setYoe] = useState(0);
@@ -19,6 +20,7 @@ function Profile() {
 
   useEffect(() => {
     profileRef.once("value", (snapshot) => {
+      setLogourl(snapshot.val().logourl);
       setUsername(snapshot.val()?.username);
       setRole(snapshot.val()?.role);
       setYoe(snapshot.val()?.yoe);
@@ -65,7 +67,7 @@ function Profile() {
         mt={2}
       >
         <Flex backgroundColor="white" p="2px" w="fit-content" borderRadius={50}>
-          <Avatar size="xl" />
+          <Avatar src={logourl} size="xl" />
         </Flex>
       </Flex>
       <Flex

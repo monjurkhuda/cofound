@@ -2,33 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import firebaseApp from "../firebase";
 import Navigation from "../navigation/Navigation";
-
 import {
   Input,
-  Box,
   Text,
   Flex,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tag,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
   Heading,
   Avatar,
   Select,
   Checkbox,
-  FormLabel,
-  TagLabel,
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
 
 function ManageStartup() {
   const [startupname, setStartupname] = useState("");

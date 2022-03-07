@@ -7,6 +7,7 @@ import { Text, Flex, Button, Tag, Avatar } from "@chakra-ui/react";
 import Navigation from "../navigation/Navigation";
 
 function ResponsiveProfile() {
+  const [logourl, setLogourl] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("tech");
   const [yoe, setYoe] = useState(0);
@@ -20,6 +21,7 @@ function ResponsiveProfile() {
 
   useEffect(() => {
     profileRef.once("value", (snapshot) => {
+      setLogourl(snapshot.val().logourl);
       setUsername(snapshot.val()?.username);
       setRole(snapshot.val()?.role);
       setYoe(snapshot.val()?.yoe);
@@ -77,7 +79,7 @@ function ResponsiveProfile() {
             w="fit-content"
             borderRadius={50}
           >
-            <Avatar size="xl" />
+            <Avatar src={logourl} size="xl" />
           </Flex>
         </Flex>
         <Flex

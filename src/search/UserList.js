@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Text, Flex, Tr, Td } from "@chakra-ui/react";
 
 function UserList(props) {
+  const [logourl, setLogourl] = useState("");
   const [username, setUsername] = useState("");
   const [startupid, setStartupid] = useState("");
   const [role, setRole] = useState("tech");
@@ -22,6 +23,7 @@ function UserList(props) {
 
   useEffect(() => {
     userRef.once("value", (snapshot) => {
+      setLogourl(snapshot.val().logourl);
       setUsername(snapshot.val().username);
       setStartupid(snapshot.val().startupid);
       setRole(snapshot.val().role);
@@ -55,11 +57,7 @@ function UserList(props) {
     <Tr>
       <Td>
         <Flex>
-          <Avatar
-            size="md"
-            src="https://i.pinimg.com/originals/37/c9/f5/37c9f5492e8219c5f91e2b3c28b74c92.png"
-            alt="Startup Logo"
-          ></Avatar>
+          <Avatar size="md" src={logourl}></Avatar>
 
           <Flex direction="column" ml={3} w="100%">
             <Flex>

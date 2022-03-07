@@ -4,35 +4,23 @@ import firebaseApp from "../firebase.js";
 import Navigation from "../navigation/Navigation";
 import {
   Input,
-  Box,
   Text,
   Flex,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tag,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
   Heading,
   Avatar,
   Select,
   Textarea,
 } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
 
 function EditProfile() {
+  const [logourl, setLogourl] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
   const [yoe, setYoe] = useState("");
   const [timezone, setTimezone] = useState("");
   const [redditusername, setRedditusername] = useState("");
   const [bio, setBio] = useState("");
-  const [startupid, setStartupid] = useState("");
   const [isLoading, setLoading] = useState(true);
 
   const history = useHistory();
@@ -42,6 +30,7 @@ function EditProfile() {
 
   useEffect(() => {
     profileRef.once("value", (snapshot) => {
+      setLogourl(snapshot.val().logourl);
       setUsername(snapshot.val().username);
       setRole(snapshot.val().role);
       setYoe(snapshot.val().yoe);
@@ -58,6 +47,7 @@ function EditProfile() {
     e.preventDefault();
 
     profileRef.update({
+      logourl: logourl,
       username: username,
       role: role,
       yoe: yoe,
@@ -100,6 +90,16 @@ function EditProfile() {
           <Heading size="lg" color="blue.700">
             Edit Your Profile
           </Heading>
+
+          <Avatar size="lg" src={logourl}></Avatar>
+
+          <Input
+            mt={2}
+            placeholder="Logo Url"
+            value={logourl}
+            onChange={(e) => setLogourl(e.target.value)}
+          ></Input>
+
           <Input
             mt={2}
             value={username}
