@@ -6,5 +6,4 @@
 [x] implement profile images
 [x] pagination
 
-[ ] users can create more than one startups and profiles
-[ ] side profile height linked to table
+[x] side profile height linked to table
