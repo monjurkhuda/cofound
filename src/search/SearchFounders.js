@@ -73,7 +73,8 @@ function SearchPlayers() {
     <Flex
       flexDir="column"
       justifyItems="center"
-      h="100vh"
+      h="100%"
+      minHeight="100vh"
       backgroundColor="gray.200"
     >
       <Navigation />
@@ -187,7 +188,11 @@ function SearchPlayers() {
             </Flex>
           </Stack>
 
-          <Flex mt={3} justifyContent="flex-end">
+          <Flex
+            mt={3}
+            justifyContent="flex-end"
+            w={["85vw", "85vw", "90vw", "60vw"]}
+          >
             {lowerRange !== 0 ? (
               <Button
                 backgroundColor="white"
