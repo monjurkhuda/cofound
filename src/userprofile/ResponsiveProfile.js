@@ -47,7 +47,8 @@ function ResponsiveProfile() {
     <Flex
       flexDir="column"
       justifyItems="center"
-      h="100vh"
+      h="100%"
+      minHeight="100vh"
       backgroundColor="gray.200"
     >
       <Navigation />
