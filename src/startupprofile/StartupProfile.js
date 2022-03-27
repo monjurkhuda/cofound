@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Navigation from "../navigation/Navigation";
-import Roster from "../Roster";
-import { SiTwitter } from "react-icons/si";
-import firebaseApp from "../firebase";
-import Profile from "../userprofile/Profile";
 import {
-  Text,
-  Flex,
+  Avatar,
   Button,
+  Flex,
+  Heading,
   Table,
   Tbody,
-  Heading,
-  Avatar,
+  Text,
   useToast,
 } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { SiTwitter } from "react-icons/si";
+import { useParams } from "react-router-dom";
+import firebaseApp from "../firebase";
+import Navigation from "../navigation/Navigation";
+import Roster from "../Roster";
+import Profile from "../userprofile/Profile";
 
 function StartupProfile() {
   const [startupname, setStartupname] = useState("");

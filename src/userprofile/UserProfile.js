@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Navigation from "../navigation/Navigation";
-import firebaseApp from "../firebase";
-import { SiTwitter } from "react-icons/si";
-import Profile from "./Profile";
 import {
-  Text,
-  Flex,
-  Button,
-  Heading,
   Avatar,
+  Button,
+  Flex,
+  Heading,
+  Text,
   useToast,
 } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { SiTwitter } from "react-icons/si";
+import { useParams } from "react-router-dom";
+import firebaseApp from "../firebase";
+import Navigation from "../navigation/Navigation";
+import Profile from "./Profile";
 
 function UserProfile() {
   const [logourl, setLogourl] = useState("");

@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import StartupList from "../search/StartupList";
-import Navigation from "../navigation/Navigation";
-import Profile from "../userprofile/Profile";
-import firebaseApp from "../firebase";
 import {
-  Text,
-  Flex,
   Button,
+  Flex,
+  Select,
+  Stack,
   Table,
   Tbody,
-  Tr,
+  Text,
   Th,
-  Stack,
-  Select,
+  Tr,
 } from "@chakra-ui/react";
-import { IoPeopleOutline } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
 import { BiBuildingHouse } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { IoPeopleOutline } from "react-icons/io5";
+import { Link, useHistory } from "react-router-dom";
+import firebaseApp from "../firebase";
+import Navigation from "../navigation/Navigation";
+import StartupList from "../search/StartupList";
+import Profile from "../userprofile/Profile";
 import "./SearchHover.css";
 
 function SearchStartups() {

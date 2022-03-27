@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import firebaseApp from "../firebase";
+import { Avatar, Flex, Td, Text, Tr } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, Text, Flex, Tr, Td } from "@chakra-ui/react";
+import firebaseApp from "../firebase";
 
 function StartupList(props) {
   const [logourl, setLogourl] = useState("");

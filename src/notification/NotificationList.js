@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import firebaseApp from "../firebase";
-import { Link } from "react-router-dom";
-import { Text, Flex, Button, Tr, Td, useToast } from "@chakra-ui/react";
+import { Button, Flex, Text, useToast } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { BiEnvelope } from "react-icons/bi";
 import { FiUserPlus } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import firebaseApp from "../firebase";
 
 function NotificationList(props) {
   const [senderStartupname, setSenderStartupname] = useState("");

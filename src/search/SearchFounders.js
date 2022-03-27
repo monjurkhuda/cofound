@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import UserList from "../search/UserList";
-import Navigation from "../navigation/Navigation";
-import firebaseApp from "../firebase";
-import Profile from "../userprofile/Profile";
 import {
-  Input,
-  Text,
-  Flex,
   Button,
+  Flex,
+  Input,
+  Select,
+  Stack,
   Table,
   Tbody,
-  Select,
-  Tr,
+  Text,
   Th,
-  Stack,
+  Tr,
 } from "@chakra-ui/react";
-import { IoPeopleOutline } from "react-icons/io5";
+import React, { useState } from "react";
 import { BiBuildingHouse } from "react-icons/bi";
+import { IoPeopleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import firebaseApp from "../firebase";
+import Navigation from "../navigation/Navigation";
+import UserList from "../search/UserList";
+import Profile from "../userprofile/Profile";
 
 function SearchPlayers() {
   const [username, setUsername] = useState("");

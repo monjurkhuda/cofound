@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { Avatar, Button, Flex, Tag, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { FiEdit2 } from "react-icons/fi";
+import { SiTwitter } from "react-icons/si";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase";
-import { SiTwitter } from "react-icons/si";
-import { FiEdit2 } from "react-icons/fi";
-import { Text, Flex, Button, Tag, Avatar } from "@chakra-ui/react";
 import Navigation from "../navigation/Navigation";
 
 function ResponsiveProfile() {

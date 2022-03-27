@@ -1,23 +1,23 @@
-import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./home/Home";
-import ResponsiveProfile from "./userprofile/ResponsiveProfile";
-import EditProfile from "./userprofile/EditProfile";
-import CreateProfile from "./userprofile/CreateProfile";
-import SignIn from "./auth/SignIn";
+import { AuthProvider } from "./Auth";
 import PasswordReset from "./auth/PasswordReset";
+import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
-import MyStartup from "./startupprofile/MyStartup";
+import Home from "./home/Home";
+import Notifications from "./notification/Notifications";
+import PrivateRoute from "./PrivateRoute";
 import SearchFounders from "./search/SearchFounders";
 import SearchStartups from "./search/SearchStartups";
-import ManageStartup from "./startupprofile/ManageStartup";
-import Notifications from "./notification/Notifications";
-import UserProfile from "./userprofile/UserProfile";
-import StartupProfile from "./startupprofile/StartupProfile";
-import { AuthProvider } from "./Auth";
-import PrivateRoute from "./PrivateRoute";
 import CreateStartup from "./startupprofile/CreateStartup";
+import ManageStartup from "./startupprofile/ManageStartup";
+import MyStartup from "./startupprofile/MyStartup";
+import StartupProfile from "./startupprofile/StartupProfile";
+import CreateProfile from "./userprofile/CreateProfile";
+import EditProfile from "./userprofile/EditProfile";
+import ResponsiveProfile from "./userprofile/ResponsiveProfile";
+import UserProfile from "./userprofile/UserProfile";
 
 const App = () => {
   return (

@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
-  Text,
-  Flex,
   Button,
+  Flex,
+  Heading,
   Table,
   Tbody,
-  Tr,
+  Text,
   Th,
-  Heading,
+  Tr,
 } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
-import { IoPeopleOutline } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
 import { BiBuildingHouse } from "react-icons/bi";
+import { IoPeopleOutline } from "react-icons/io5";
+import { VscRocket } from "react-icons/vsc";
+import { Link } from "react-router-dom";
 import firebaseApp from "../firebase.js";
 import HomeStartupList from "./HomeStartupList";
 

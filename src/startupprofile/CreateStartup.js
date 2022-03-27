@@ -1,16 +1,16 @@
+import {
+  Avatar,
+  Button,
+  Flex,
+  Heading,
+  Input,
+  Select,
+  Textarea,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import firebaseApp from "../firebase.js";
 import Navigation from "../navigation/Navigation.js";
-import {
-  Input,
-  Flex,
-  Button,
-  Heading,
-  Avatar,
-  Select,
-  Textarea,
-} from "@chakra-ui/react";
 
 function CreateStartup() {
   const [startupname, setStartupname] = useState("");

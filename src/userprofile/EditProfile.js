@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import {
+  Avatar,
+  Button,
+  Flex,
+  Heading,
+  Input,
+  Select,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import firebaseApp from "../firebase.js";
 import Navigation from "../navigation/Navigation";
-import {
-  Input,
-  Text,
-  Flex,
-  Button,
-  Heading,
-  Avatar,
-  Select,
-  Textarea,
-} from "@chakra-ui/react";
 
 function EditProfile() {
   const [logourl, setLogourl] = useState("");

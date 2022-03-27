@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Text, Flex, Tr, Td, Tag, Avatar } from "@chakra-ui/react";
-import firebaseApp from "../firebase";
+import { Avatar, Flex, Td, Text, Tr } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { SiTwitter } from "react-icons/si";
+import firebaseApp from "../firebase";
 
 function StartupList(props) {
   const [founderUsername, setFounderUsername] = useState("");
@@ -17,7 +16,6 @@ function StartupList(props) {
   const [wantbiz, setWantbiz] = useState("");
   const [wantsales, setWantsales] = useState("");
   const [wanthr, setWanthr] = useState("");
-
   const startupid = props.startupid;
   const db = firebaseApp.database();
   const startupRef = db.ref().child("startups/" + startupid);
@@ -52,26 +50,6 @@ function StartupList(props) {
     founderid,
     founderUsername,
   ]);
-
-  function hideTwitter() {
-    return twitter?.length === 0 ? true : false;
-  }
-
-  if (wantany === "yes") {
-    lookingForArray.push("any");
-  }
-  if (wanttech === "yes") {
-    lookingForArray.push("tech");
-  }
-  if (wantbiz === "yes") {
-    lookingForArray.push("biz");
-  }
-  if (wantsales === "yes") {
-    lookingForArray.push("sales");
-  }
-  if (wanthr === "yes") {
-    lookingForArray.push("hr");
-  }
 
   return (
     <Tr>

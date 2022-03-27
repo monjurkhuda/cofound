@@ -1,10 +1,10 @@
+import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import React, { useCallback, useContext, useState } from "react";
-import { withRouter, Redirect } from "react-router";
-import { Link } from "react-router-dom";
-import firebaseApp from "../firebase.js";
-import { AuthContext } from "../Auth.js";
-import { Input, Text, Flex, Button } from "@chakra-ui/react";
 import { VscRocket } from "react-icons/vsc";
+import { Redirect, withRouter } from "react-router";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../Auth.js";
+import firebaseApp from "../firebase.js";
 
 const SignIn = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState("");

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebaseApp from "../firebase";
 import { Link } from "react-router-dom";
-
 import { Avatar, Text, Flex, Tr, Td } from "@chakra-ui/react";
 
 function UserList(props) {

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import firebaseApp from "../firebase.js";
 import {
-  Input,
-  Text,
-  Flex,
-  Button,
-  Heading,
   Avatar,
+  Button,
+  Flex,
+  Heading,
+  Input,
   Select,
+  Text,
   Textarea,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { VscRocket } from "react-icons/vsc";
+import { useHistory } from "react-router-dom";
+import firebaseApp from "../firebase.js";
 
 function CreateProfile() {
   const [logourl, setLogourl] = useState("");

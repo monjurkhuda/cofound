@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import firebaseApp from "./firebase";
-import { Link, useHistory } from "react-router-dom";
-import { Text, Flex, Button, Tr, Td, Avatar, Stack } from "@chakra-ui/react";
+import { Avatar, Button, Flex, Stack, Td, Text, Tr } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { GiConverseShoe } from "react-icons/gi";
+import { Link, useHistory } from "react-router-dom";
+import firebaseApp from "./firebase";
 
 function Roster(props) {
   const [logourl, setLogourl] = useState("");

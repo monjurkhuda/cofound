@@ -1,8 +1,8 @@
+import { Button, Flex, Input, Text, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { VscRocket } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase.js";
-import { Input, Text, Flex, Button, useToast } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
 
 function PasswordReset() {
   const [email, setEmail] = useState("");

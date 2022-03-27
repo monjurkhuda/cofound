@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { Flex, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import firebaseApp from "../firebase";
-import NotificationList from "./NotificationList.js";
 import Navigation from "../navigation/Navigation";
 import Profile from "../userprofile/Profile";
-import { Text, Flex } from "@chakra-ui/react";
+import NotificationList from "./NotificationList.js";
 
 function Notifications() {
   const [notifFilteredArray, setNotifFilteredArray] = useState([]);

@@ -1,9 +1,9 @@
+import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import React, { useCallback, useState } from "react";
+import { VscRocket } from "react-icons/vsc";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase";
-import { Input, Text, Flex, Button } from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
 
 const SignUp = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState("");
