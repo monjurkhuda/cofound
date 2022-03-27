@@ -51,6 +51,22 @@ function StartupList(props) {
     founderUsername,
   ]);
 
+  if (wantany === "yes") {
+    lookingForArray.push("any");
+  }
+  if (wanttech === "yes") {
+    lookingForArray.push("tech");
+  }
+  if (wantbiz === "yes") {
+    lookingForArray.push("biz");
+  }
+  if (wantsales === "yes") {
+    lookingForArray.push("sales");
+  }
+  if (wanthr === "yes") {
+    lookingForArray.push("hr");
+  }
+
   return (
     <Tr>
       <Td>
