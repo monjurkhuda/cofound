@@ -8,15 +8,16 @@ import {
   Th,
   Tr,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BiBuildingHouse } from "react-icons/bi";
 import { IoPeopleOutline } from "react-icons/io5";
 import { VscRocket } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import firebaseApp from "../firebase.js";
 import HomeStartupList from "./HomeStartupList";
+import { withRouter } from "react-router";
 
-function Home() {
+function Home({ history }) {
   const [loading, setLoading] = useState(true);
   const [startupCountState, setStartupCountState] = useState(0);
   const [userCountState, setUserCountState] = useState(0);
@@ -59,6 +60,21 @@ function Home() {
     setLoading(false);
   }, []);
 
+  const demoSignIn = useCallback(
+    async (event) => {
+      event.preventDefault();
+      try {
+        await firebaseApp
+          .auth()
+          .signInWithEmailAndPassword("demo@demo.com", "demouserpass");
+        history.push("/searchstartups");
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    [history]
+  );
+
   if (loading === true) {
     return <div>{"Loading..."}</div>;
   }
@@ -100,9 +116,23 @@ function Home() {
           </Text>
         </Flex>
 
-        <Link to="/signin" style={{ textDecoration: "none", color: "white" }}>
-          <Button colorScheme="yellow">Sign In</Button>
-        </Link>
+        <Flex mt={2} alignItems="center">
+          <Link to="/signin" style={{ textDecoration: "none", color: "white" }}>
+            <Button size="sm" colorScheme="yellow">
+              Sign In
+            </Button>
+          </Link>
+
+          <Button
+            size="sm"
+            colorScheme="purple"
+            ml={4}
+            onClick={demoSignIn}
+            boxShadow="base"
+          >
+            Demo Sign In
+          </Button>
+        </Flex>
       </Flex>
 
       <Heading mt={4} textShadow="base" textColor="blue.700" size="md">
@@ -202,4 +232,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default withRouter(Home);
