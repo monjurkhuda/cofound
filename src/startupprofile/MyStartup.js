@@ -1,34 +1,20 @@
-import React, { useState, useEffect } from "react";
+import {
+  Avatar,
+  Button,
+  Flex,
+  Heading,
+  Table,
+  Tbody,
+  Text,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { IoExitOutline } from "react-icons/io5";
+import { RiSuitcaseLine } from "react-icons/ri";
 import { Link, useHistory } from "react-router-dom";
 import firebaseApp from "../firebase";
 import Navigation from "../navigation/Navigation";
 import Roster from "../Roster";
 import Profile from "../userprofile/Profile";
-import {
-  Input,
-  Box,
-  Text,
-  Flex,
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Icon,
-  Heading,
-  Select,
-  Avatar,
-  useToast,
-} from "@chakra-ui/react";
-import { VscRocket } from "react-icons/vsc";
-import { AiOutlineSearch } from "react-icons/ai";
-import { HiSearchCircle } from "react-icons/hi";
-import { IoExitOutline } from "react-icons/io5";
-import { RiSuitcaseLine } from "react-icons/ri";
 
 function MyStartup() {
   const [startupname, setStartupname] = useState("");
@@ -99,7 +85,8 @@ function MyStartup() {
         <Flex
           flexDir="column"
           justifyItems="center"
-          h="100vh"
+          h="100%"
+          minHeight="100vh"
           backgroundColor="gray.200"
         >
           <Navigation />
