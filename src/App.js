@@ -18,8 +18,6 @@ import CreateProfile from "./userprofile/CreateProfile";
 import EditProfile from "./userprofile/EditProfile";
 import ResponsiveProfile from "./userprofile/ResponsiveProfile";
 import UserProfile from "./userprofile/UserProfile";
-import NextMatch from "./NextMatch";
-import CreatePlayer from "./CreatePlayer";
 
 const App = () => {
   return (
@@ -29,13 +27,11 @@ const App = () => {
           <PrivateRoute exact path="/profile" component={ResponsiveProfile} />
           <PrivateRoute exact path="/editprofile" component={EditProfile} />
           <PrivateRoute exact path="/createprofile" component={CreateProfile} />
-          <PrivateRoute exact path="/createplayer" component={CreatePlayer} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/" component={Home} />
           <Route exact path="/passwordreset" component={PasswordReset} />
           <Route exact path="/signup" component={SignUp} />
           <PrivateRoute exact path="/mystartup" component={MyStartup} />
-          <Route exact path="/nextmatch" component={NextMatch} />
           <PrivateRoute
             exact
             path="/searchfounders"

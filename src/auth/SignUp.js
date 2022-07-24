@@ -16,7 +16,7 @@ const SignUp = ({ history }) => {
         await firebaseApp
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
-        history.push("/nextmatch");
+        history.push("/createprofile");
       } catch (error) {
         setErrorMessage(error.message);
       }
@@ -31,7 +31,7 @@ const SignUp = ({ history }) => {
         await firebaseApp
           .auth()
           .signInWithEmailAndPassword("demo@demo.com", "demouserpass");
-        history.push("/nextmatch");
+        history.push("/searchstartups");
       } catch (error) {
         setErrorMessage(error.message);
       }
