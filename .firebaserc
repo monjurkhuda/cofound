@@ -1,7 +1,5 @@
 {
   "projects": {
-    "default": "cofounder-match",
-    "cofound": "cofounder-match"
-  },
-  "targets": {}
+    "default": "onlinefootballmanager-bff8a"
+  }
 }

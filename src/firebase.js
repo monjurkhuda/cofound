@@ -10,7 +10,6 @@ const firebaseApp = firebase.initializeApp({
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
   appID: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_APP_ID,
 });
 
 export default firebaseApp;
